@@ -1,0 +1,290 @@
+{
+	"size" : 16,
+	"source" :  {
+		"path" : "tileset.png",
+		"width" : 1024,
+		"height" : 1024
+	},
+	"tiles" : [
+		{
+			"id" : "tree",
+			"group" : [
+				{
+					"id" : "top",
+					"at" : [0, 0]
+				},
+				{
+					"id" : "bottom",
+					"at" : [0, 1]
+				},
+				{
+					"id" : "small",
+					"at" : [1, 0]
+				}
+			]
+		},
+		{
+			"id" : "grass",
+			"at" : [1, 1]
+		},
+		{
+			"id" : "ground",
+			"at" : [2, 0]
+		},
+		{
+			"id" : "sign",
+			"at" : [2, 2]
+		},
+		{
+			"id" : "door",
+			"at" : [2, 1]
+		},
+		{
+			"id" : "roof",
+			"group" : [
+				{
+					"id" : "small",
+					"group" : [
+						{
+							"id" : "left",
+							"at" : [3, 0]
+						},
+						{
+							"id" : "middle",
+							"at" : [4, 0]
+						},
+						{
+							"id" : "right",
+							"at" : [5, 0]
+						}
+					]
+				},
+				{
+					"id" : "top",
+					"group" : [
+						{
+							"id" : "left",
+							"at" : [6, 0]
+						},
+						{
+							"id" : "middle",
+							"at" : [7, 0]
+						},
+						{
+							"id" : "right",
+							"at" : [8, 0]
+						}
+					]
+				},
+				{
+					"id" : "middle",
+					"group" : [
+						{
+							"id" : "left",
+							"at" : [6, 1]
+						},
+						{
+							"id" : "middle",
+							"at" : [7, 1]
+						},
+						{
+							"id" : "right",
+							"at" : [8, 1]
+						}
+					]
+				},
+				{
+					"id" : "bottom",
+					"group" : [
+						{
+							"id" : "left",
+							"at" : [3, 1]
+						},
+						{
+							"id" : "middle",
+							"at" : [4, 1]
+						},
+						{
+							"id" : "right",
+							"at" : [5, 1]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id" : "house",
+			"group" : [
+				{
+					"id" : "middle",
+					"group" : [
+						{
+							"id" : "left",
+							"at" : [6, 2]
+						},
+						{
+							"id" : "middle",
+							"at" : [7, 2]
+						},
+						{
+							"id" : "right",
+							"at" : [8, 2]
+						}
+					]
+				},
+				{
+					"id" : "bottom",
+					"group" : [
+						{
+							"id" : "left",
+							"at" : [3, 2]
+						},
+						{
+							"id" : "middle",
+							"at" : [4, 2]
+						},
+						{
+							"id" : "right",
+							"at" : [5, 2]
+						}
+					]
+				},
+				{
+					"id" : "lamp",
+					"group" : [
+						{
+							"id" : "left",
+							"group" : [
+								{
+									"id" : "wall",
+									"at" : [2, 3]
+								},
+								{
+									"id" : "middle",
+									"at" : [3, 3]
+								}
+							]
+						},
+						{
+							"id" : "right",
+							"group" : [
+								{
+									"id" : "wall",
+									"at" : [5, 3]
+								},
+								{
+									"id" : "middle",
+									"at" : [4, 3]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id" : "flower",
+			"group" : [
+				{
+					"id" : "bottom",
+					"period" : 500,
+					"frames" : [
+						{
+							"at" : [0, 2]
+						},
+						{
+							"at" : [1, 2]
+						}
+					]
+				},
+				{
+					"id" : "top",
+					"period" : 500,
+					"frames" : [
+						{
+							"at" : [0, 3]
+						},
+						{
+							"at" : [1, 3]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id" : "water",
+			"period" : 250,
+			"frames" : [
+				{
+					"at" : [0, 4]
+				},
+				{
+					"at" : [1, 4]
+				},
+				{
+					"at" : [2, 4]
+				},
+				{
+					"at" : [3, 4]
+				}
+			]
+		},
+		{
+			"id" : "shore",
+			"group" : [
+				{
+					"id" : "corner",
+					"group" : [
+						{
+							"id" : "topleft",
+							"at" : [9, 0]
+						}
+					]
+				},
+				{
+					"id" : "up",
+					"at" : [10, 0]
+				},
+				{
+					"id" : "left",
+					"at" : [9, 1]
+				}
+			]
+		},
+		{
+			"id" : "ledge",
+			"group" : [
+				{
+					"id" : "left",
+					"at" : [11, 0]
+				},
+				{
+					"id" : "bottom",
+					"at" : [12, 1]
+				},
+				{
+					"id" : "right",
+					"at" : [13, 0]
+				},
+				{
+					"id" : "corner",
+					"group" : [
+						{
+							"id" : "bottomleft",
+							"at" : [11, 1]
+						},
+						{
+							"id" : "bottomright",
+							"at" : [13, 1]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id" : "tall_grass",
+			"at" : [0, 5]
+		}
+	]
+}
+

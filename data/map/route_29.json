@@ -1,0 +1,12 @@
+{
+	"name" : "Route 29",
+	"map" : "route_29",
+	"border" : "trees",
+	"neighbors" : {
+		"right" : {
+			"id" : "new_bark_town",
+			"offset" : 0
+		}
+	}
+}
+
