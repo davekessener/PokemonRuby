@@ -19,7 +19,7 @@ module Pokemon
 			raise ArgumentError, "Invalid tilesize #{@tilesize}! Expected #{Utils::TILE_SIZE}!" if @tilesize != Utils::TILE_SIZE
 			src = data['source']
 			fn = Utils::absolute_path(Utils::MEDIA_DIR, Utils::TILESET_DIR, src['path'])
-			@source = Gosu::Image.load_tiles(fn, @tilesize, @tilesize, { retro: true })
+			@source = Utils::load_tiles(fn, @tilesize)
 			@cols = src['width'] / @tilesize
 			@tiles = {}
 			

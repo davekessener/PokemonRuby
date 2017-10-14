@@ -2,71 +2,81 @@
 	"source" : "gold.png",
 	"width" : 16,
 	"height" : 16,
-	"frames" : [
+	"group" : [
 		{
-			"id" : "main",
-			"at" : [0, 0]
-		},
-		{
-			"id" : "standing",
+			"id" : "down",
+			"default" : true,
 			"group" : [
 				{
-					"id" : "up",
-					"at" : [0, 1]
-				},
-				{
-					"id" : "down",
+					"id" : "standing",
+					"default" : true,
 					"at" : [0, 0]
 				},
 				{
-					"id" : "left",
-					"at" : [0, 2]
-				},
-				{
-					"id" : "right",
-					"at" : [0, 3]
+					"id" : "walking",
+					"alias" : [ "running" ],
+					"alternatives" : [
+						{
+							"at" : [1, 0]
+						},
+						{
+							"at" : [2, 0]
+						}
+					]
 				}
 			]
 		},
 		{
-			"id" : "walking",
+			"id" : "up",
 			"group" : [
 				{
-					"id" : "up",
-					"group" : [
+					"id" : "standing",
+					"default" : true,
+					"at" : [0, 1]
+				},
+				{
+					"id" : "walking",
+					"alias" : [ "running" ],
+					"alternatives" : [
 						{
-							"id" : "1",
 							"at" : [1, 1]
 						},
 						{
-							"id" : "2",
 							"at" : [2, 1]
 						}
 					]
+				}
+			]
+		},
+		{
+			"id" : "left",
+			"group" : [
+				{
+					"id" : "standing",
+					"default" : true,
+					"at" : [0, 2]
 				},
 				{
-					"id" : "down",
-					"group" : [
-						{
-							"id" : "1",
-							"at" : [1, 0]
-						},
-						{
-							"id" : "2",
-							"at" : [2, 0]
-						}
-					]
-				},
-				{
-					"id" : "left",
+					"id" : "walking",
+					"alias" : [ "running" ],
 					"at" : [1, 2]
+				}
+			]
+		},
+		{
+			"id" : "right",
+			"group" : [
+				{
+					"id" : "standing",
+					"default" : true,
+					"at" : [0, 2]
 				},
 				{
-					"id" : "right",
-					"at" : [1, 3]
+					"id" : "walking",
+					"alias" : [ "running" ],
+					"at" : [1, 2]
 				}
 			]
 		}
 	]
 }
-

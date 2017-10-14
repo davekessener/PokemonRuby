@@ -26,6 +26,7 @@ class Main
 
 		if not @failed.empty?
 			puts "Failed to include files #{@failed.join(', ')}!"
+			@failed.each { |f| require_relative f }
 		else
 			Pokemon::Logger::log("Executing in directory '#{$root_dir}'")
 

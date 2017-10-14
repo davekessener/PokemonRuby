@@ -31,6 +31,14 @@ module Pokemon
 		def draw
 			@components.each(&:draw)
 		end
+
+		def remove?
+			@removable
+		end
+
+		def remove!
+			@removable = true
+		end
 	end
 
 	class Component
