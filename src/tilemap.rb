@@ -87,7 +87,7 @@ module Pokemon
 
 			raise ArgumentError, "Invalid metadata!" if @meta.any? { |l| l.any? { |t| t.nil? } }
 
-			Logger::log("loaded tilemap #{id} (#{@width} x #{@height} x #{@maps[:top].size + @maps[:bottom].size}) using tileset #{data['tileset']}")
+			Utils::Logger::log("loaded tilemap #{id} (#{@width} x #{@height} x #{@maps[:top].size + @maps[:bottom].size}) using tileset #{data['tileset']}")
 		end
 
 		def draw_map(map, x, y, z)

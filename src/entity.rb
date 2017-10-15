@@ -43,15 +43,22 @@ module Pokemon
 						object.queue.shift
 						o.exit
 						@cont = false
+						o = object.queue.first
+						if o
+							o.enter
+							@cont = true
+						end
 					end
 				end
 			end
 		end
 
 		class DelayedCallbackEvent < Event
+			attr_reader :duration, :delay
+
 			def initialize(object, delay, &callback)
 				super(object)
-				@delay = delay
+				@duration = @delay = delay
 				@callback = callback
 			end
 
@@ -66,6 +73,10 @@ module Pokemon
 
 			def done?
 				@delay <= 0
+			end
+
+			def progress
+				@delay / @duration.to_f
 			end
 		end
 	end

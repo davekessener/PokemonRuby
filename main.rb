@@ -28,15 +28,16 @@ class Main
 			puts "Failed to include files #{@failed.join(', ')}!"
 			@failed.each { |f| require_relative f }
 		else
-			Pokemon::Logger::log("Executing in directory '#{$root_dir}'")
+			Pokemon::Utils::Logger::threshold = Pokemon::Utils::Logger::WARNING
+			Pokemon::Utils::Logger::log("Executing in directory '#{$root_dir}'")
 
-			scene = Pokemon::OverworldScene.new
-			$window = Pokemon::Window.new(scene)
+			$window = Pokemon::Window.new
+			$window.switch_scene(Pokemon::LoadingScene.new)
 
 			begin
 				$window.show
 			rescue
-				Pokemon::Logger::print_all
+				Pokemon::Utils::Logger::print_all
 				raise
 			end
 		end

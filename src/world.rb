@@ -3,16 +3,20 @@ module Pokemon
 		attr_reader :camera, :player
 		attr_accessor :map
 
-		def initialize
+		def load(data)
 			@camera = Camera::Container.new
 			@player = Player.new
 
 			@camera.following = @player
+			Map[data['map']].enter_map(data['x'], data['y'])
 		end
 
-		def spawn_player(map, px, py)
-			@map = Map[map]
-			@map.enter_map(px, py)
+		def save
+			{
+				'x' => @player.x,
+				'y' => @player.y,
+				'map' => @map.id
+			}
 		end
 
 		def update(delta)

@@ -9,7 +9,7 @@ module Pokemon
 				@pool << o
 			end
 
-			def upate(delta)
+			def update(delta)
 				@pool.each { |o| o.update(delta) }
 				@pool.reject! &:remove?
 			end

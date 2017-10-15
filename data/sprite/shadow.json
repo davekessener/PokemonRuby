@@ -1,0 +1,13 @@
+{
+	"source" : "animation.png",
+	"width" : 16,
+	"height" : 16,
+	"group" : [
+		{
+			"id" : "default",
+			"default" : true,
+			"at" : [0, 1]
+		}
+	]
+}
+

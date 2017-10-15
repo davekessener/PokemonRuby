@@ -18,25 +18,25 @@ module Pokemon
 			attr_reader :default
 
 			def initialize(data)
-				if data['at']
-					@frames = [ Frame::get_index(*data['at']) ]
-				elsif data['frames']
-					@frames = data['frames'].map do |frame|
-						Frame::get_index(*frame['at'])
+				if data.at?
+					@frames = [ Frame::get_index(*data.at) ]
+				elsif data.frames?
+					@frames = data.frames.map do |frame|
+						Frame::get_index(*frame.at)
 					end
-				elsif data['group']
+				elsif data.group?
 					@children = {}
-					data['group'].each do |e|
-						t = Frame.new(e)
-						@default = t if e['default']
-						@children[e['id']] = t
-						e['alias'].each { |a| @children[a] = t } if e['alias']
+					data.group.each do |g|
+						t = Frame.new(g)
+						@default = t if g.default?
+						@children[g.id] = t
+						g.alias.each { |e| @children[e] = t } if g.alias?
 					end
-				elsif data['alternatives']
+				elsif data.alternatives?
 					@children = {}
-					data['alternatives'].each_with_index do |alt, i|
+					data.alternatives.each_with_index do |alt, i|
 						t = Frame.new(alt)
-						@default = t if alt['default']
+						@default = t if alt.default?
 						@children[i.to_s] = t
 					end
 				end
@@ -44,29 +44,47 @@ module Pokemon
 			end
 
 			def [](id)
-				if @children[id]
+				if @children and @children[id]
 					@children[id]
 				else
 					@default
 				end
 			end
 
+			def renderable?
+				@frames
+			end
+
 			def frame(p)
-				@frames[(p * @frames.size).to_i]
+				if renderable?
+					@frames[(p * @frames.size).to_i % @frames.size]
+				elsif @default != self
+					@default.frame(p)
+				else
+					raise "No renderable frame!"
+				end
 			end
 
 			def self.get_index(x, y)
-				x + y * 8 # TODO REMOVE FUCKING MAGIC CONSTANT!
+				x + y * 8 # TODO REMOVE FUCKING MAGIC CONSTANT
+			end
+
+			def self.from_root(data)
+				data.send(:define_singleton_method, :at?) { false }
+				data.send(:define_singleton_method, :frames?) { false }
+				data.send(:define_singleton_method, :alternatives?) { false }
+				Frame.new(data)
 			end
 		end
 
-		def load_data(data)
-			fn = Utils::absolute_path(Utils::MEDIA_DIR, Utils::SPRITE_DIR, data['source'])
-			Logger::log("Loading spritesheet for #{id} from #{Utils::relative_path(fn)}")
-			@width = data['width']
-			@height = data['height']
+		def load_data(json)
+			data = Sprite::json_loader.generate(json)
+			fn = Utils::absolute_path(Utils::MEDIA_DIR, Utils::SPRITE_DIR, data.source)
+			Utils::Logger::log("Loading spritesheet for #{id} from #{Utils::relative_path(fn)}")
+			@width = data.width
+			@height = data.height
 			@source = Gosu::Image.load_tiles(fn, @width, @height, {retro: true})
-			@frames = Frame.new(data)
+			@frames = Frame::from_root(data)
 		end
 
 		def self.resource_path
@@ -78,6 +96,17 @@ module Pokemon
 		end
 
 		def self.generator
+			frames = Utils::Enforcer::ArrayGenerator.new('list of frames', [:optional]) do
+				constraint_not_empty
+
+				every_tag :tag do
+					array 'at', 'frame index coordinates', [:optional] do
+						constraint_size 2
+
+						every_tag :int
+					end
+				end
+			end
 			recurse = Utils::Enforcer::CompoundGenerator.new('frame', [:optional]) do
 				strict
 
@@ -105,11 +134,13 @@ module Pokemon
 					constraint_not_empty
 
 					every_tag :tag do
-						array 'at', 'frame index coordinates' do
+						array 'at', 'frame index coordinates', [:optional] do
 							constraint_size 2
 
 							every_tag :int
 						end
+
+						bool 'default', 'designates default path', [:optional]
 					end
 				end
 				
@@ -121,6 +152,8 @@ module Pokemon
 			end
 
 			recurse.content['group'].gen = recurse
+			recurse.content['alternatives'].gen.content['frames'] = frames
+			recurse.content['frames'] = frames
 
 			generator = Utils::Enforcer::generate 'sprite' do
 				strict
@@ -137,7 +170,7 @@ module Pokemon
 					constraint_positive
 				end
 
-				array 'group', 'root of frame tree' do
+				array 'group', 'root of frame tree', [:optional] do
 					constraint_not_empty
 
 					every_tag :tag

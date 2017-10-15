@@ -9,7 +9,7 @@ module Pokemon
 		WINDOW_SIZE = [768, 432]
 		SCREEN_SCALE = 3
 
-		WALKING_SPEED = 48
+		WALKING_SPEED = 56
 		TILE_SIZE = 16
 
 		DATA_DIR = 'data'
@@ -18,6 +18,7 @@ module Pokemon
 		TILEMAP_DIR = 'tilemap'
 		SPRITE_DIR = 'sprite'
 		MAP_DIR = 'map'
+		SAVE_DIR = 'saves'
 
 		Directions = {
 			left: Vec2.new(-1, 0),
@@ -48,6 +49,10 @@ module Pokemon
 
 		def self.camera_offset(camera)
 			return [screen_width / 2 - camera.x, screen_height / 2 - camera.y]
+		end
+
+		def self.center_object(object)
+			[(TILE_SIZE - object.width) / 2, TILE_SIZE * 3 / 4 - object.height]
 		end
 
 		def self.get_z(id)

@@ -17,10 +17,25 @@
 					"alias" : [ "running" ],
 					"alternatives" : [
 						{
-							"at" : [1, 0]
+							"default" : true,
+							"frames" : [
+								{
+									"at" : [0, 0]
+								},
+								{
+									"at" : [1, 0]
+								}
+							]
 						},
 						{
-							"at" : [2, 0]
+							"frames" : [
+								{
+									"at" : [0, 0]
+								},
+								{
+									"at" : [2, 0]
+								}
+							]
 						}
 					]
 				}
@@ -39,10 +54,25 @@
 					"alias" : [ "running" ],
 					"alternatives" : [
 						{
-							"at" : [1, 1]
+							"default" : true,
+							"frames" : [
+								{
+									"at" : [0, 1]
+								},
+								{
+									"at" : [1, 1]
+								}
+							]
 						},
 						{
-							"at" : [2, 1]
+							"frames" : [
+								{
+									"at" : [0, 1]
+								},
+								{
+									"at" : [2, 1]
+								}
+							]
 						}
 					]
 				}
@@ -59,7 +89,14 @@
 				{
 					"id" : "walking",
 					"alias" : [ "running" ],
-					"at" : [1, 2]
+					"frames" : [
+						{
+							"at" : [0, 2]
+						},
+						{
+							"at" : [1, 2]
+						}
+					]
 				}
 			]
 		},
@@ -69,12 +106,19 @@
 				{
 					"id" : "standing",
 					"default" : true,
-					"at" : [0, 2]
+					"at" : [0, 3]
 				},
 				{
 					"id" : "walking",
 					"alias" : [ "running" ],
-					"at" : [1, 2]
+					"frames" : [
+						{
+							"at" : [0, 3]
+						},
+						{
+							"at" : [1, 3]
+						}
+					]
 				}
 			]
 		}

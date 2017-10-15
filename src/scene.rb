@@ -3,7 +3,7 @@ module Pokemon
 		def enter
 		end
 		
-		def leave
+		def exit
 		end
 
 		def update(delta)

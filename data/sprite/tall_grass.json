@@ -1,0 +1,24 @@
+{
+	"source" : "animation.png",
+	"width" : 16,
+	"height" : 16,
+	"group" : [
+		{
+			"id" : "standing",
+			"default" : true,
+			"at" : [0, 0]
+		},
+		{
+			"id" : "walking",
+			"frames" : [
+				{
+					"at" : [1,0]
+				},
+				{
+					"at" : [2, 0]
+				}
+			]
+		}
+	]
+}
+

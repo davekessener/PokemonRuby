@@ -1,7 +1,7 @@
 module Pokemon
 	module OverworldSprite
 		class Container < Entity::Container
-			attr_reader :movement
+			attr_reader :movement, :renderer
 			attr_accessor :speed, :corporal, :moving
 			attr_accessor :facing, :sprite, :type
 
@@ -11,7 +11,7 @@ module Pokemon
 				@type = :entity
 				@speed = Utils::WALKING_SPEED
 				@movement = Movement.new(self)
-				Renderer.new(self)
+				@renderer = Renderer.new(self)
 			end
 
 			def corporal?
@@ -48,39 +48,23 @@ module Pokemon
 		end
 
 		class Renderer < Component
+			attr_accessor :default_renderer
+
+			def [](id)
+				(@default_renderer || Render[:default]).sub_renderer(id)
+			end
+
 			def draw
 				if not object.queue.empty? and object.queue.first.renderer
 					object.queue.first.renderer.draw(object)
+				elsif @default_renderer
+					@default_renderer.draw(object)
 				else
 					object.sprite.draw([], 0.0, object.x, object.y, Utils::get_z(object.type))
 				end
 			end
 		end
 
-		class WalkRenderer
-			attr_accessor :progress
-
-			def draw(object)
-				@progress ||= 0.0
-
-				s = object.sprite
-				if s
-					l = Utils::TILE_SIZE 
-					dx, dy = object.x % l, object.y % l
-					d = dx.abs + dy.abs
-					p = []
-
-					p << object.facing
-					p << ((object.moving? and d >= l / 4 and d < 3 * l / 4) ? 'walking' : 'standing')
-					p << object.movement.steps % 2
-
-					Gosu::translate((l - s.width) / 2, l * 3 / 4 - s.height) do
-						s.draw(p, object.movement.progress, object.x, object.y, Utils::get_z(object.type))
-					end
-				end
-			end
-		end
-		
 		class Movement < Component
 			attr_reader :steps
 
@@ -92,7 +76,7 @@ module Pokemon
 			def try_move(dir)
 				if not object.moving?
 					if dir != object.facing
-						object.queue << TurnEvent.new(object, dir)
+						object.queue << FailedWalkEvent.new(object, dir, 45)
 					else
 						@steps += 1
 
@@ -100,7 +84,7 @@ module Pokemon
 							$world.map.exit_tile(object)
 							object.queue << WalkEvent.new(object, dir) unless $world.map.on_move(object, dir)
 						else
-							object.queue << FailedWalkEvent.new(object, dir)
+							object.queue << FailedWalkEvent.new(object, dir, 500)
 						end
 					end
 				end
@@ -120,12 +104,12 @@ module Pokemon
 		class WalkEvent < Entity::Event
 			include Walker
 
-			def initialize(object, dir)
+			def initialize(object, dir, distance = 1)
 				super(object)
 				object.facing = dir
 				d = Utils::Directions[dir]
-				@movement = Utils::Movement::Distance.new(d * Utils::TILE_SIZE, d * object.speed)
-				self.renderer = WalkRenderer.new
+				@movement = Utils::Movement::Distance.new(d * Utils::TILE_SIZE * distance, d * object.speed)
+				self.renderer = object.renderer[:walking]
 			end
 
 			def exit
@@ -145,19 +129,25 @@ module Pokemon
 			end
 		end
 
-		class TurnEvent < Entity::DelayedCallbackEvent
-			def initialize(object, dir)
-				super(object, 50)
-				object.facing = dir
-			end
-		end
-
 		class FailedWalkEvent < Entity::DelayedCallbackEvent
 			include Walker
 
-			def initialize(object, dir)
-				super(object, Utils::TILE_SIZE * 1000 / object.speed)
+			def initialize(object, dir, dur)
+				super(object, dur)
 				object.facing = dir
+				self.renderer = object.renderer[:failed_walking]
+			end
+
+			def update(delta)
+				super
+				self.renderer.progress = progress
+			end
+		end
+
+		class JumpEvent < WalkEvent
+			def initialize(object, dir)
+				super(object, dir, 2)
+				self.renderer = object.renderer[:jumping]
 			end
 		end
 	end

@@ -11,8 +11,16 @@ module Pokemon
 			@sprite.x
 		end
 
+		def px
+			@sprite.px
+		end
+
 		def y
 			@sprite.y
+		end
+
+		def py
+			@sprite.py
 		end
 
 		def width

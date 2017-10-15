@@ -27,7 +27,7 @@ module Pokemon
 
 			@size = @tiles.size
 
-			Logger::log("loaded tileset #{id} with #{@size} tiles.")
+			Utils::Logger::log("loaded tileset #{id} with #{@size} tiles.")
 		end
 
 		def load_tile(id, tile)

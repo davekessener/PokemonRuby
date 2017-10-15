@@ -2,9 +2,11 @@ module Pokemon
 	class Window < Gosu::Window
 		attr_reader :scene
 
-		def initialize(scene)
+		def initialize
 			super(*Utils::WINDOW_SIZE)
-			@scene = scene
+			$ui = UI::System.new
+			$world = World.new
+
 			@fps = 0
 		end
 
@@ -22,6 +24,18 @@ module Pokemon
 
 		def draw
 			@scene.draw
+		end
+
+		def button_down(id)
+		end
+
+		def button_up(id)
+		end
+
+		def switch_scene(scene)
+			@scene.exit if @scene
+			@scene = scene
+			@scene.enter
 		end
 
 		private

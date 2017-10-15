@@ -7,6 +7,7 @@ module Pokemon
 		def enter_map(px, py)
 			@player_sprite.px = px
 			@player_sprite.py = py
+			@player_sprite.facing = $world.player.sprite.facing if $world.player.sprite
 			$world.map = self
 			$world.player.sprite = @player_sprite
 		end
@@ -41,7 +42,9 @@ module Pokemon
 		def on_move(o, dir)
 			d = Utils::Directions[dir]
 			tx, ty = o.px + d.dx, o.py + d.dy
-			get_meta(tx, ty).on_move(o, dir)
+			m = get_meta(tx, ty)
+			o.renderer.default_renderer = m.default_renderer
+			m.on_move(o, dir)
 		end
 
 		def out_of_bounds?(tx, ty)
@@ -134,6 +137,7 @@ module Pokemon
 			@player_sprite = OverworldSprite::Container.new
 			@player_sprite.sprite = Sprite['gold']
 			@player_sprite.corporal = true
+			@player_sprite.renderer.default_renderer = Render[:default]
 		end
 
 		def self.resource_path

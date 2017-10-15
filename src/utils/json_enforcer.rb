@@ -52,8 +52,8 @@ module Pokemon
 			end
 
 			class BooleanGenerator < TagGenerator
-				def initialize(desc, &block)
-					super(nil.class, desc, [], &block)
+				def initialize(desc, opt = [], &block)
+					super(nil.class, desc, opt, &block)
 				end
 
 				def generate(data)
@@ -103,7 +103,7 @@ module Pokemon
 				end
 
 				def bool(name, desc, opt = [], &block)
-					set_content(name, BoolGenerator.new(desc, opt, &block))
+					set_content(name, BooleanGenerator.new(desc, opt, &block))
 				end
 
 				{ int: Integer, double: Numeric, string: String }.each do |name, type|
@@ -188,7 +188,7 @@ module Pokemon
 					end
 				end
 
-				def constrain_size(s)
+				def constraint_size(s)
 					constraint("size of #{s}") { |v| v.size == s }
 				end
 			end

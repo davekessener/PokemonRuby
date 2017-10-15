@@ -30,6 +30,10 @@ module Pokemon
 			def interact
 			end
 
+			def default_renderer
+				Render[:default]
+			end
+
 			def on_move(object, dir)
 				false
 			end
@@ -67,6 +71,11 @@ module Pokemon
 				@direction = d
 			end
 
+			def on_move(object, dir)
+				object.queue << OverworldSprite::JumpEvent.new(object, dir)
+				true
+			end
+
 			def can_enter_from(dir, meta)
 				dir == @direction
 			end
@@ -75,6 +84,10 @@ module Pokemon
 		class TallGrass < Meta
 			def can_enter_from(dir, meta)
 				true
+			end
+
+			def default_renderer
+				Render[:tall_grass]
 			end
 		end
 
