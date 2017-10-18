@@ -1,6 +1,6 @@
 module Pokemon
 	module Entity
-		class Container < GameObject
+		class Base < GameObject
 			attr_reader :queue, :controller
 
 			def initialize(x, y, w, h)
@@ -25,6 +25,9 @@ module Pokemon
 			end
 
 			def update(delta)
+			end
+
+			def accept(id)
 			end
 
 			def done?

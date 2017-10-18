@@ -28,7 +28,7 @@ class Main
 			puts "Failed to include files #{@failed.join(', ')}!"
 			@failed.each { |f| require_relative f }
 		else
-			Pokemon::Utils::Logger::threshold = Pokemon::Utils::Logger::WARNING
+#			Pokemon::Utils::Logger::threshold = Pokemon::Utils::Logger::WARNING
 			Pokemon::Utils::Logger::log("Executing in directory '#{$root_dir}'")
 
 			$window = Pokemon::Window.new

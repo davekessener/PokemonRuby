@@ -134,7 +134,7 @@ module Pokemon
 				@neighbors[dir] = Utils::Neighbor.new(self, n['id'], dir, n['offset'])
 			end
 
-			@player_sprite = OverworldSprite::Container.new
+			@player_sprite = OverworldSprite::Base.new
 			@player_sprite.sprite = Sprite['gold']
 			@player_sprite.corporal = true
 			@player_sprite.renderer.default_renderer = Render[:default]

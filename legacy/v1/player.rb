@@ -37,19 +37,22 @@ module Pokemon
 	end
 
 	class PlayerInput < Component
-		def update(delta)
+		def initialize(object)
+			super(object)
+			@input = $input.create(:player)
+			@input << self
+			@input.active = true
+		end
+
+		def down(input, id)
+			@@directions ||= [:left, :right, :up, :down]
 			o = object.sprite
-			if not o.moving? and object.can_move?
-				if Gosu::button_down? Gosu::KB_UP
-					o.movement.try_move :up
-				elsif Gosu::button_down? Gosu::KB_DOWN
-					o.movement.try_move :down
-				elsif Gosu::button_down? Gosu::KB_LEFT
-					o.movement.try_move :left
-				elsif Gosu::button_down? Gosu::KB_RIGHT
-					o.movement.try_move :right
-				end
+			if not o.moving? and object.can_move? and @@directions.include? id
+				o.movement.try_move id
 			end
+		end
+
+		def up(input, id)
 		end
 	end
 end

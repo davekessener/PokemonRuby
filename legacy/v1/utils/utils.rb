@@ -6,11 +6,13 @@ require_relative 'vec'
 module Pokemon
 	module Utils
 		TITLE = 'Yet Another Pokemon Clone'
-		WINDOW_SIZE = [768, 432]
+		SCREEN_SIZE = [256, 144]
 		SCREEN_SCALE = 3
+		WINDOW_SIZE = SCREEN_SIZE.map { |i| SCREEN_SCALE * i }
 
 		WALKING_SPEED = 56
 		TILE_SIZE = 16
+		CHAR_SIZE = 8
 
 		DATA_DIR = 'data'
 		MEDIA_DIR = 'media'
@@ -18,6 +20,8 @@ module Pokemon
 		TILEMAP_DIR = 'tilemap'
 		SPRITE_DIR = 'sprite'
 		MAP_DIR = 'map'
+		BORDER_DIR = 'border'
+		CHARSET_DIR = 'charset'
 		SAVE_DIR = 'saves'
 
 		Directions = {
@@ -57,12 +61,12 @@ module Pokemon
 
 		def self.get_z(id)
 			@@zs ||= {background: 0, bottom: 1, entity: 10, top: 100}
+			@@zs.fetch(id, 101)
+		end
 
-			if @@zs[id]
-				@@zs[id]
-			else
-				101
-			end
+		def self.get_priority(id)
+			@@priorities ||= {player: 1, world: 10, ui: 100}
+			@@priorities.fetch(id, 0)
 		end
 
 		def self.load_tiles(fn, w, retro = true)
@@ -71,6 +75,21 @@ module Pokemon
 			@@tilesets[fn] = Gosu::Image.load_tiles(fn, w, w, {retro: retro}) unless @@tilesets[fn]
 
 			@@tilesets[fn]
+		end
+
+		def self.button_id(id)
+			@@button_ids ||= {
+				Gosu::KB_A => :left,
+				Gosu::KB_D => :right,
+				Gosu::KB_W => :up,
+				Gosu::KB_S => :down,
+				Gosu::KB_L => :A,
+				Gosu::KB_P => :B,
+				Gosu::KB_RETURN => :start,
+				Gosu::KB_BACKSPACE => :select
+			}
+
+			@@button_ids.fetch(id, :unknown)
 		end
 	end
 end

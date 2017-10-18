@@ -1,6 +1,6 @@
 module Pokemon
 	module OverworldSprite
-		class Container < Entity::Container
+		class Base < Entity::Base
 			attr_reader :movement, :renderer
 			attr_accessor :speed, :corporal, :moving
 			attr_accessor :facing, :sprite, :type

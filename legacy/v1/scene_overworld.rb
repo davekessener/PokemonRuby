@@ -10,10 +10,8 @@ module Pokemon
 		end
 
 		def draw
-			Gosu::scale(Utils::SCREEN_SCALE, Utils::SCREEN_SCALE) do
-				$world.draw
-				@objects.draw
-			end
+			$world.draw
+			@objects.draw
 		end
 	end
 end
