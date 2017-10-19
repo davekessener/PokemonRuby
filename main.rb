@@ -4,7 +4,7 @@ require 'gosu'
 class Main
 	def initialize
 		$root_dir = File.expand_path(File.dirname(__FILE__))
-		require_pattern = File.join($root_dir, '**/*.rb')
+		require_pattern = File.join($root_dir, 'src/**/*.rb')
 		@failed = []
 		
 		Dir.glob(require_pattern).each do |file|

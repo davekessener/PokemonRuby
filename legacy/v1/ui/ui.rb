@@ -2,7 +2,7 @@ module Pokemon
 	module UI
 		class System < Input::Callback
 			def initialize
-				@pool = Utils::ObjectPool.new
+				@pool = ObjectPool.new
 				@input = $input.create(:ui)
 
 				@input << self

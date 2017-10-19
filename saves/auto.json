@@ -1,5 +1,6 @@
 {
 	"map" : "new_bark_town",
 	"x" : 15,
-	"y" : 9
+	"y" : 9,
+	"facing" : "left"
 }
