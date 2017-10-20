@@ -5,9 +5,7 @@ module Pokemon
 		end
 
 		def draw
-			Utils::scale_screen do
-				$world.draw
-			end
+			$world.draw
 		end
 	end
 end

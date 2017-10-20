@@ -17,6 +17,7 @@ module Pokemon
 			end
 
 			def down?(id)
+				@pressed[id] = false
 				@buttons[id]
 			end
 

@@ -18,7 +18,7 @@ module Pokemon
 			def trigger(entity)
 			end
 
-			def can_enter(entity)
+			def can_enter(entity, tile)
 				false
 			end
 
@@ -56,9 +56,8 @@ module Pokemon
 				@level = level
 			end
 
-			def can_enter(entity)
-				src = $world.map.get_tile(entity.px, entity.py)
-				(not src.respond_to? :level or (src.level - @level) <= 1)
+			def can_enter(entity, tile)
+				(not tile.respond_to? :level or (tile.level - @level) <= 1)
 			end
 
 			def encounter_type
@@ -67,8 +66,8 @@ module Pokemon
 		end
 
 		class Water < Base
-			def can_enter(entity)
-				entity.model.state == :surf
+			def can_enter(entity, tile)
+				tile == self
 			end
 
 			def encounter_type
@@ -84,17 +83,17 @@ module Pokemon
 				@direction = dir
 			end
 
-			def can_enter(entity)
-				entity.facing == @direction
+			def can_enter(entity, tile)
+				entity.model.facing == @direction
 			end
 
 			def trigger(entity)
-				entity.controller.override(JumpAction.new(entity, @direction))
+				entity.controller.override(Entity::JumpAction.new(entity, @direction))
 			end
 		end
 
 		class TallGrass < Base
-			def can_enter(entity)
+			def can_enter(entity, tile)
 				true
 			end
 

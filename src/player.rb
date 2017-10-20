@@ -4,8 +4,8 @@ module Pokemon
 
 		def initialize(data)
 			super(data['x'], data['y'])
-			@input = $input.create(:player)
-			PlayerInput.new(self, @input)
+			@input = ButtonBuffer.new($input.create(:player))
+			PlayerInput.new(self)
 
 			model.sprite = Sprite['gold']
 			model.facing = data['facing'].to_sym
@@ -13,24 +13,46 @@ module Pokemon
 		end
 	end
 
-	class PlayerInput < Component
-		def initialize(object, input)
-			super(object)
-			@input = input
-			
-			@input.activate
+	class ButtonBuffer < Input::Callback
+		def initialize(input)
+			input << self
+			input.activate
+
+			@buttons = []
 		end
 
+		def direction
+			@buttons.find { |b| Utils::Directions.include? b }
+		end
+
+		def pressed
+			@buttons.first
+		end
+
+		def down(input, id)
+			up(input, id)
+			@buttons.unshift id
+			Utils::Logger::log("after down(:#{id}) is [#{@buttons.map {|e| ":#{e}"}.join(', ')}], dir = :#{direction}")
+		end
+
+		def up(input, id)
+			@buttons.delete id if down? id
+			Utils::Logger::log("after up(:#{id}) is [#{@buttons.map {|e| ":#{e}"}.join(', ')}], dir = :#{direction}")
+		end
+
+		def down?(id)
+			@buttons.include? id
+		end
+	end
+
+	class PlayerInput < Component
 		def update(delta)
 			unless object.controller.active?
-				[:up, :down, :left, :right].each do |d|
-					if @input.down? d
-						if d == object.facing
-							object.controller.add(PlayerMoveAction.new(object, @input.down?(:B) ? :running : :walking))
-						else
-							object.controller.add(PlayerTurnAction.new(object, d))
-						end
-					end
+				d = object.input.direction
+				if d == object.model.facing
+					object.controller.add(PlayerMoveAction.new(object, object.input.down?(:B) ? :running : :walking), :player)
+				elsif d
+					object.controller.add(FailedMoveAction.new(object, d, 25), :player)
 				end
 			end
 		end
@@ -38,27 +60,31 @@ module Pokemon
 
 	class PlayerMoveAction < Entity::Action
 		def initialize(player, speed)
-			@player = player
+			super(player)
 			@speed_id = speed
 			@direction = Utils::direction(player.model.facing)
-			@speed = Utils::Velocity.new(Utils::speed(@speed_id))
 			@left = 0
 		end
 
 		def enter
-			@player.model.type = @speed_id
+			update_speed(@speed_id)
 		end
 
 		def exit
-			@player.model.x = @player.px * $world.tile_size
-			@player.model.y = @player.py * $world.tile_size
-			@player.model.type = :standing
-			@player.model.animation = 0
-			@player.model.progress = 0.0
+			entity.model.dx = 0
+			entity.model.dy = 0
+			entity.model.type = :standing
+			entity.model.progress = 0.0
 		end
 
 		def interrupt
 			self.exit
+		end
+
+		def update_speed(id)
+			@speed_id = id
+			@speed = Utils::Velocity.new(Utils::speed(@speed_id))
+			entity.model.type = @speed_id
 		end
 
 		def update(delta)
@@ -66,29 +92,42 @@ module Pokemon
 			dx, dy = *(@direction * d)
 			l = $world.tile_size
 
-			@player.model.x += dx
-			@player.model.y += dy
+			entity.model.dx += dx
+			entity.model.dy += dy
 			
 			@left -= d
 			if @left <= 0
 				@left += l
-				@player.model.animation += 1
+				entity.model.animation += 1
 			
 				@done = true
-				unless @player.controller.queued?
-					px, py = @player.px + @direction.dx, @player.py + @direction.dy
+				unless entity.controller.queued?
+					dir = entity.input.direction
+					if dir and dir != entity.model.facing
+						entity.model.facing = dir
+						entity.controller.override(PlayerMoveAction.new(entity, @speed_id))
+						return
+					end
+
+					px, py = entity.px + @direction.dx, entity.py + @direction.dy
+					dx, dy = *(@direction * l)
+
+					entity.model.dx -= dx
+					entity.model.dy -= dy
 				
-					if @player.input.down? @player.model.facing
-						if $world.can_move_to(@player, px, py)
+					if entity.input.down? entity.model.facing
+						if $world.can_move_to(entity, px, py)
 							$world.move_player(px, py)
+							update_speed(entity.input.down?(:B) ? :running : :walking)
+							@done = false
 						else
-							@player.controller.override(FailedMoveAction.new(@player))
+							entity.controller.override(FailedMoveAction.new(entity, entity.model.facing, 600))
 						end
 					end
 				end
 			end
 
-			@player.model.progress = (l - @left).to_f / l
+			entity.model.progress = (l - @left).to_f / l
 		end
 
 		def done?
@@ -96,19 +135,27 @@ module Pokemon
 		end
 	end
 
-	class PlayerTurnAction < Entity::Action
-		def initialize(player, facing)
-			@player = player
-			@facing = facing
+	class FailedMoveAction < Entity::TimedAction
+		def initialize(player, dir, duration)
+			super(player, duration)
+			@direction = dir
 		end
 
 		def enter
-			@player.model.facing = @facing
+			entity.model.facing = @direction
+			entity.model.type = :walking
 		end
-	end
 
-	class FailedMoveAction < Entity::Action
-		def initialize(player)
+		def exit
+			entity.model.type = :standing
+		end
+
+		def update(delta)
+			super
+			d = entity.input.direction 
+			if d and d != entity.model.facing
+				@done = true
+			end
 		end
 	end
 end

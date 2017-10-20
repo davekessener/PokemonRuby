@@ -7,6 +7,14 @@ module Pokemon
 				@dx, @dy = dx, dy
 			end
 
+			def to_a
+				[@dx, @dy]
+			end
+
+			def zero?
+				@dx.zero? and @dy.zero?
+			end
+
 			def *(s)
 				Vec2.new(@dx * s, @dy * s)
 			end
@@ -28,8 +36,8 @@ module Pokemon
 			end
 
 			def abs
-				return @dy if @dx == 0
-				return @dx if @dy == 0
+				return @dy.abs if @dx == 0
+				return @dx.abs if @dy == 0
 				Math.sqrt(@dx * @dx + @dy * @dy)
 			end
 		end

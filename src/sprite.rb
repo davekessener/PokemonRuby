@@ -11,6 +11,11 @@ module Pokemon
 				@source[f.frame(idx, p)].draw(x, y, z)
 			end
 
+			def centered(&block)
+				l = $world.tile_size
+				Gosu::translate((l - @width) / 2, 3 * l / 4 - @height, &block) if block_given?
+			end
+
 			private_class_method :new
 
 			private
@@ -21,6 +26,9 @@ module Pokemon
 				@width, @height = data['width'], data['height']
 				@source, cols, _ = *Utils::load_tiles(fn, @width, @height)
 				@frames = Frame.new(data, cols)
+
+				@width *= Utils::SCREEN_SCALE
+				@height *= Utils::SCREEN_SCALE
 			end
 
 			def self.resource_path

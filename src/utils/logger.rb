@@ -35,12 +35,16 @@ module Pokemon
 				def log(msg, severity = INFO)
 					@logs ||= [[], [], [], []]
 					@thresh ||= INFO
+					@lengths ||= {}
 
 					c = caller_locations(1,1)[0]
 					path = c.path.gsub("#{$root_dir}/",'')
 					o = [msg, path, c.lineno, c.label, Time.utc(*Time.now.to_a)]
 
 					@logs[severity] << o
+					set_length(:severity, severity.to_s.length)
+					set_length(:path, path.length)
+					set_length(:name, c.label.length)
 
 					puts format(severity, *o) unless severity < @thresh
 				end
@@ -59,8 +63,17 @@ module Pokemon
 					end
 				end
 
+				private
+
 				def format(severity, msg, path, line, name, time)
-					"#{time} [#{'%.8s' % severity.to_s}] #{path}:#{line} in #{name} '#{msg}'"
+					s_sev = "%#{@lengths[:severity]}s" % severity.to_s
+					s_path = "%-#{@lengths[:path]}s" % path
+					s_name = "%-#{@lengths[:name]}s" % name
+					"#{time} [#{s_sev}] #{s_path}:#{'%3d' % line} in #{s_name} '#{msg}'"
+				end
+
+				def set_length(id, l)
+					@lengths[id] = [@lengths[id] || 0, l].max
 				end
 			end
 		end

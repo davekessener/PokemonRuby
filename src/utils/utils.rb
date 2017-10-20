@@ -22,6 +22,8 @@ module Pokemon
 		CHARSET_DIR = 'charset'
 		SAVE_DIR = 'saves'
 
+		Directions = [:left, :right, :up, :down]
+
 		def self.scale_screen(&block)
 			if block_given?
 				Gosu::scale(Utils::SCREEN_SCALE, Utils::SCREEN_SCALE, &block)
@@ -40,11 +42,11 @@ module Pokemon
 
 		def self.speed(id)
 			@@speeds ||= {
-				walking: 64,
+				walking: 56,
 				running: 96
 			}
 
-			@@speeds.fetch(id, 16)
+			@@speeds.fetch(id, 16) * SCREEN_SCALE
 		end
 
 		def self.absolute_path(*dirs)
@@ -62,11 +64,11 @@ module Pokemon
 		end
 
 		def self.screen_width
-			SCREEN_SIZE[0]
+			WINDOW_SIZE[0] #SCREEN_SIZE[0]
 		end
 
 		def self.screen_height
-			SCREEN_SIZE[1]
+			WINDOW_SIZE[1] #SCREEN_SIZE[1]
 		end
 
 		def self.now
@@ -87,15 +89,9 @@ module Pokemon
 			@@tilesets ||= {}
 
 			unless @@tilesets[fn]
-				img = Gosu::Image.new(fn, {retro: retro})
+				img = Image::from_file(fn)
 				cx, cy = img.width / w, img.height / h
-				tiles = []
-				cx.times do |x|
-					cy.times do |y|
-						tiles << img.subimage(x * w, y * h, w, h)
-					end
-				end
-				@@tilesets[fn] = [tiles, cx, cy]
+				@@tilesets[fn] = [img.tiles(w, h), cx, cy]
 			end
 
 			@@tilesets[fn]

@@ -21,6 +21,7 @@ module Pokemon
 			data['tiles'].each { |tile| load_tile [], tile }
 
 			@size = @tiles.size
+			@tile_size *= Utils::SCREEN_SCALE
 
 			Utils::Logger::log("loaded tileset #{id} with #{@size} tiles!")
 		end

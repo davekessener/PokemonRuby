@@ -1,19 +1,16 @@
 module Pokemon
 	module Entity
 		class Base < GameObject
-			attr_reader :px, :py
+			attr_accessor :px, :py
 			attr_reader :controller
 			attr_accessor :model, :corporal
 
 			def initialize(x, y)
 				super()
 				@px, @py = x, y
-				@model = BasicModel.new
+				@model = BasicModel.new(self)
 				@controller = ActionController.new(self)
 				ModelRenderer.new(self)
-
-				@model.x = @px * $world.tile_size
-				@model.y = @py * $world.tile_size
 			end
 		end
 
@@ -33,7 +30,12 @@ module Pokemon
 				@active
 			end
 
-			def add(action, priority)
+			def queued?
+				not @queue.empty?
+			end
+
+			def add(action, priority_id)
+				priority = Utils::get_priority(priority_id)
 				if priority > @priority
 					@priority = priority
 					@queue = []
@@ -65,6 +67,7 @@ module Pokemon
 			def next_action
 				@active.exit if @active
 				@active = @queue.shift
+				@active.enter if @active
 			end
 		end
 
@@ -75,12 +78,14 @@ module Pokemon
 		end
 
 		class BasicModel
-			attr_accessor :x, :y, :z, :sprite, :facing
+			attr_accessor :dx, :dy, :z, :sprite
 			attr_accessor :state, :type, :animation
 			attr_accessor :progress
+			attr_reader :facing
 
-			def initialize
-				@x, @y = 0, 0
+			def initialize(entity)
+				@entity = entity
+				@dx, @dy = 0, 0
 				@z = Utils::get_z(:entity)
 				@sprite = Sprite['undefined']
 				@facing = :down
@@ -90,30 +95,25 @@ module Pokemon
 				@progress = 0.0
 			end
 
+			def facing=(id)
+				raise ArgumentError, "The only valid directions are #{Utils::Directions.join(', ')}!" unless Utils::Directions.include? id
+				@facing = id
+			end
+
+			def x
+				@dx + @entity.px * $world.tile_size
+			end
+
+			def y
+				@dy + @entity.py * $world.tile_size
+			end
+
 			def width
 				@sprite.width
 			end
 
 			def height
 				@sprite.height
-			end
-		end
-
-		class Action
-			def enter
-			end
-
-			def exit
-			end
-
-			def interrupt
-			end
-
-			def update(delta)
-			end
-
-			def done?
-				true
 			end
 		end
 	end

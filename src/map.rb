@@ -54,7 +54,7 @@ module Pokemon
 
 		def can_move_to(entity, px, py)
 			map, x, y = *from_coords(px, py)
-			map.tiles[x][y].can_enter(entity) if map.is_a? Map
+			map.tiles[x][y].can_enter(entity, @tiles[entity.px][entity.py]) if map.is_a? Map
 		end
 
 		def enter
@@ -83,10 +83,6 @@ module Pokemon
 			false
 		end
 
-		private_class_method :new
-
-		private
-
 		def from_coords(px, py)
 			d = out_of_bounds? px, py
 			if d
@@ -105,6 +101,10 @@ module Pokemon
 				[self, px, py]
 			end
 		end
+
+		private_class_method :new
+
+		private
 
 		def load_data(data)
 			@name = data['name']

@@ -15,9 +15,6 @@ module Pokemon
 		def update(delta)
 			@map.update(delta)
 			@entities.update(delta)
-
-			@player.model.x -= 1
-			@player.model.y -= 1
 		end
 
 		def draw

@@ -21,10 +21,16 @@ module Pokemon
 			@pool.each(&block) if block_given?
 		end
 
+		def any?(&block)
+			@pool.any?(&block) if block_given?
+		end
+
 		alias_method :add, :<<
 	end
 
 	class GameObject
+		attr_reader :components
+
 		def initialize
 			@components = []
 		end
@@ -51,6 +57,7 @@ module Pokemon
 
 		def initialize(object)
 			@object = object
+			@object.components << self
 		end
 
 		def update(delta)

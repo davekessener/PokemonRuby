@@ -17,9 +17,7 @@ module Pokemon
 			end
 
 			def overlap?(r)
-				return false if x0 >= r.x1 or r.x0 >= x1
-				return false if y0 >= r.y1 or r.y0 >= y1
-				true
+				not (x0 >= r.x1 or r.x0 >= x1 or y0 >= r.y1 or r.y0 >= y1)
 			end
 		end
 	end
