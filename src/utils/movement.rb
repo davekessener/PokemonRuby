@@ -6,14 +6,14 @@ module Pokemon
 
 				def initialize(max, speed = Velocity.new(0))
 					@speed = speed
-					@max = @left = max
+					@max = @left = max.abs
 					@total = get_total(@speed, @max)
 				end
 
 				def calculate(delta)
 					delta = update_delta(delta)
 					r = update_result(@speed.calculate(delta))
-					@left -= update_leftover(delta, r)
+					@left -= update_leftover(delta, r).abs
 					@done = @left.zero?
 					r
 				end
@@ -49,7 +49,7 @@ module Pokemon
 				end
 			end
 
-			class Timed
+			class Timed < Base
 				def update_delta(delta)
 					delta > left ? left : delta
 				end

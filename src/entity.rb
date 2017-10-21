@@ -2,7 +2,7 @@ module Pokemon
 	module Entity
 		class Base < GameObject
 			attr_accessor :px, :py
-			attr_reader :controller
+			attr_reader :controller, :renderer
 			attr_accessor :model, :corporal
 
 			def initialize(x, y)
@@ -10,11 +10,13 @@ module Pokemon
 				@px, @py = x, y
 				@model = BasicModel.new(self)
 				@controller = ActionController.new(self)
-				ModelRenderer.new(self)
+				@renderer = ModelRenderer.new(self)
 			end
 		end
 
 		class ActionController < Component
+			attr_reader :active
+
 			def initialize(object)
 				super(object)
 				reset
@@ -30,8 +32,16 @@ module Pokemon
 				@active
 			end
 
+			def empty?
+				not active? and not queued?
+			end
+
 			def queued?
 				not @queue.empty?
+			end
+
+			def <<(action)
+				add(action, @priority)
 			end
 
 			def add(action, priority_id)
@@ -78,14 +88,14 @@ module Pokemon
 		end
 
 		class BasicModel
-			attr_accessor :dx, :dy, :z, :sprite
+			attr_accessor :dx, :dy, :dz, :z, :sprite
 			attr_accessor :state, :type, :animation
 			attr_accessor :progress
 			attr_reader :facing
 
 			def initialize(entity)
 				@entity = entity
-				@dx, @dy = 0, 0
+				@dx, @dy, @dz = 0, 0, 0
 				@z = Utils::get_z(:entity)
 				@sprite = Sprite['undefined']
 				@facing = :down
@@ -98,6 +108,17 @@ module Pokemon
 			def facing=(id)
 				raise ArgumentError, "The only valid directions are #{Utils::Directions.join(', ')}!" unless Utils::Directions.include? id
 				@facing = id
+			end
+
+			def reset(*vars)
+				if vars.last.is_a? Hash
+					vars.pop.each do |k,v|
+						send "#{k}=", v
+					end
+				end
+				vars.each do |v|
+					send "#{v}=", 0
+				end
 			end
 
 			def x

@@ -43,10 +43,15 @@ module Pokemon
 		def self.speed(id)
 			@@speeds ||= {
 				walking: 56,
+				jumping: 64,
 				running: 96
 			}
 
 			@@speeds.fetch(id, 16) * SCREEN_SCALE
+		end
+
+		def self.char_size
+			CHAR_SIZE
 		end
 
 		def self.absolute_path(*dirs)

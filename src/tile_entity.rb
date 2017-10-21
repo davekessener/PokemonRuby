@@ -88,7 +88,12 @@ module Pokemon
 			end
 
 			def trigger(entity)
-				entity.controller.override(Entity::JumpAction.new(entity, @direction))
+				d = Utils::direction(@direction)
+				px, py = entity.px + d.dx, entity.py + d.dy
+				entity.px -= d.dx
+				entity.py -= d.dy
+				entity.model.facing = @direction
+				entity.controller.override(Entity::JumpAction.new(entity, px, py))
 			end
 		end
 

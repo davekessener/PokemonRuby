@@ -15,6 +15,10 @@ module Pokemon
 			def dup
 				Velocity.new(@speed)
 			end
+
+			def to_s
+				@speed.to_s
+			end
 		end
 	end
 end

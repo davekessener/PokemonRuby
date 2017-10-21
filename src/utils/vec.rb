@@ -15,6 +15,10 @@ module Pokemon
 				@dx.zero? and @dy.zero?
 			end
 
+			def >(e)
+				abs > e.abs
+			end
+
 			def *(s)
 				Vec2.new(@dx * s, @dy * s)
 			end
@@ -39,6 +43,10 @@ module Pokemon
 				return @dy.abs if @dx == 0
 				return @dx.abs if @dy == 0
 				Math.sqrt(@dx * @dx + @dy * @dy)
+			end
+
+			def to_s
+				"{dx: #{@dx}, dy: #{@dy}}"
 			end
 		end
 	end

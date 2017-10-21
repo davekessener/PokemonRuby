@@ -3,7 +3,7 @@ module Pokemon
 		def initialize
 			super(*Utils::WINDOW_SIZE)
 			$input = Input::System.new
-#			$ui = UI::System.new
+			$ui = UI::System.new
 
 			@fps = 0
 		end
@@ -15,7 +15,7 @@ module Pokemon
 		def update
 			delta = calculate_delta
 
-#			$ui.update(delta)
+			$ui.update(delta)
 			@scene.update(delta)
 
 			update_fps
@@ -23,7 +23,7 @@ module Pokemon
 
 		def draw
 			Utils::scale_screen do
-#				$ui.draw
+				$ui.draw
 			end
 
 			@scene.draw if @scene

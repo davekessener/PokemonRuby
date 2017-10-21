@@ -4,6 +4,10 @@
 	"height" : 16,
 	"group" : [
 		{
+			"id" : "shadow",
+			"at" : [2, 2]
+		},
+		{
 			"id" : "down",
 			"default" : true,
 			"group" : [

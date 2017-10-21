@@ -2,9 +2,9 @@ module Pokemon
 	class Player < Entity::Base
 		attr_reader :input
 
-		def initialize(data)
+		def initialize(input, data)
 			super(data['x'], data['y'])
-			@input = ButtonBuffer.new($input.create(:player))
+			@input = ButtonBuffer.new(input)
 			PlayerInput.new(self)
 
 			model.sprite = Sprite['gold']
@@ -16,7 +16,6 @@ module Pokemon
 	class ButtonBuffer < Input::Callback
 		def initialize(input)
 			input << self
-			input.activate
 
 			@buttons = []
 		end
@@ -71,10 +70,8 @@ module Pokemon
 		end
 
 		def exit
-			entity.model.dx = 0
-			entity.model.dy = 0
+			entity.model.reset(:dx, :dy, :dz, :progress)
 			entity.model.type = :standing
-			entity.model.progress = 0.0
 		end
 
 		def interrupt

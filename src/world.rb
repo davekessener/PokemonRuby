@@ -1,8 +1,14 @@
 module Pokemon
 	class World
+		attr_reader :player, :player_input
+
+		def initialize
+			@player_input = $input.create(:player)
+		end
+
 		def load(data)
 			@map = Map[data['map']]
-			@player = Player.new(data)
+			@player = Player.new(@player_input, data)
 			@camera = Camera.new(@player.model)
 			@entities = @map.entities
 			@entities.add(@player)
@@ -35,6 +41,14 @@ module Pokemon
 		def can_move_to(entity, px, py)
 			return false if @entities.any? { |e| e.corporal and e.px == px and e.py == py }
 			@map.can_move_to(entity, px, py)
+		end
+
+		def move_entity(e, px, py)
+			if e == @player
+				move_player(px, py)
+			else
+				e.px, e.py = px, py
+			end
 		end
 
 		def move_player(px, py)
