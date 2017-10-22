@@ -1,24 +1,26 @@
 module Pokemon
 	module Input
 		class Base
+			attr_reader :buttons
+
 			def initialize
-				@buttons = {}
+				@buttons = []
 				@pressed, @released = {}, {}
 			end
 
 			def down(id)
-				@pressed[id] = true unless @buttons[id]
-				@buttons[id] = true
+				@pressed[id] = true unless @buttons.include? id
+				@buttons.unshift id
 			end
 
 			def up(id)
-				@released[id] = true if @buttons[id]
-				@buttons[id] = false
+				@released[id] = true if @buttons.include? id
+				@buttons.delete id
 			end
 
 			def down?(id)
 				@pressed[id] = false
-				@buttons[id]
+				@buttons.include? id
 			end
 
 			def pressed?(id)
@@ -34,7 +36,7 @@ module Pokemon
 			end
 
 			def reset
-				@buttons = {}
+				@buttons = []
 				@pressed, @released = {}, {}
 			end
 		end
@@ -49,20 +51,18 @@ module Pokemon
 			def create(id)
 				r = Receiver.new(id, self, @empty, Utils::get_priority(id))
 				@receivers << r
-				@receivers.sort { |a,b| a.priority <=> b.priority }
+				@receivers.sort! { |a,b| b.priority <=> a.priority }
 				r
 			end
 
 			def down(id)
 				super
 				@active.down(id) if @active
-				Utils::Logger::log("Button :#{id} down.")
 			end
 
 			def up(id)
 				super
 				@active.up(id) if @active
-				Utils::Logger::log("Button :#{id} up.")
 			end
 
 			def activate(r)
@@ -70,9 +70,7 @@ module Pokemon
 
 				return if @active and @active.priority >= r.priority
 
-				@active.base = @empty if @active
-				@active = r
-				@active.base = self
+				set_active(r)
 
 				Utils::Logger::log("Activating input '#{@active.id}'.")
 			end
@@ -87,11 +85,17 @@ module Pokemon
 
 				@receivers.each do |recv|
 					if recv.active?
-						@active = recv
+						set_active(recv)
 						Utils::Logger::log("Activating input '#{@active.id}' instead.")
 						break
 					end
 				end
+			end
+
+			def set_active(a)
+				@active.base = @empty if @active
+				@active = a
+				@active.base = self
 			end
 		end
 
@@ -120,6 +124,10 @@ module Pokemon
 				@callbacks << cb
 			end
 
+			def delete(cb)
+				@callbacks.delete cb
+			end
+
 			def active=(v)
 				if v != @active
 					@active = v
@@ -145,11 +153,11 @@ module Pokemon
 			end
 
 			def down(id)
-				@callbacks.each { |cb| cb.down(@base, id) } if active?
+				@callbacks.each { |cb| cb.down(@base, id) if cb.respond_to? :down } if active?
 			end
 
 			def up(id)
-				@callbacks.each { |cb| cb.up(@base, id) } if active?
+				@callbacks.each { |cb| cb.up(@base, id) if cb.respond_to? :up } if active?
 			end
 
 			def pressed?(id)
@@ -162,6 +170,10 @@ module Pokemon
 
 			def down?(id)
 				@base.down? id
+			end
+
+			def buttons
+				@base.buttons.dup
 			end
 		end
 	end

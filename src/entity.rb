@@ -28,6 +28,11 @@ module Pokemon
 				@active = nil
 			end
 
+			def clear
+				@queue = []
+				@priority = 0
+			end
+
 			def active?
 				@active
 			end
@@ -83,7 +88,7 @@ module Pokemon
 
 		class ModelRenderer < Component
 			def draw
-				$world.renderer_at(object.px, object.py).draw(object.model)
+				$world.renderer_at(object.px, object.py).draw(object.model) if object.model
 			end
 		end
 
@@ -97,7 +102,7 @@ module Pokemon
 				@entity = entity
 				@dx, @dy, @dz = 0, 0, 0
 				@z = Utils::get_z(:entity)
-				@sprite = Sprite['undefined']
+				@sprite = nil
 				@facing = :down
 				@state = :default
 				@type = :standing
@@ -130,11 +135,11 @@ module Pokemon
 			end
 
 			def width
-				@sprite.width
+				@sprite ? @sprite.width : 0
 			end
 
 			def height
-				@sprite.height
+				@sprite ? @sprite.height : 0
 			end
 		end
 	end

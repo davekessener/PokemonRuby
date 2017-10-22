@@ -20,6 +20,7 @@ module Pokemon
 		MAP_DIR = 'map'
 		BORDER_DIR = 'border'
 		CHARSET_DIR = 'charset'
+		LANG_DIR = 'lang'
 		SAVE_DIR = 'saves'
 
 		Directions = [:left, :right, :up, :down]
@@ -54,6 +55,10 @@ module Pokemon
 			CHAR_SIZE
 		end
 
+		def self.language
+			'EN_US'
+		end
+
 		def self.absolute_path(*dirs)
 			File.join($root_dir, *dirs)
 		end
@@ -86,7 +91,7 @@ module Pokemon
 		end
 
 		def self.get_priority(id)
-			@@priorities ||= {player: 1, world: 10, ui: 100}
+			@@priorities ||= {player: 1, world: 10, script: 50, ui: 100}
 			@@priorities.fetch(id, 0)
 		end
 

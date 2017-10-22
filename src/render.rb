@@ -15,7 +15,7 @@ module Pokemon
 					model.sprite.draw([model.facing, model.type], model.animation, model.progress, model.x, model.y - model.dz, model.z)
 
 					model.sprite.draw([:shadow, model.facing, model.type], model.animation, model.progress, model.x, model.y, model.z - 1) if model.dz > 0
-				end
+				end if model.sprite
 			end
 		end
 

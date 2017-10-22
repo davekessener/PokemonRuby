@@ -4,56 +4,44 @@ module Pokemon
 
 		def initialize(input, data)
 			super(data['x'], data['y'])
-			@input = ButtonBuffer.new(input)
-			PlayerInput.new(self)
+			@input = input
+			@input << PlayerInput.new(self)
 
 			model.sprite = Sprite['gold']
 			model.facing = data['facing'].to_sym
 			self.corporal = true
 		end
-	end
-
-	class ButtonBuffer < Input::Callback
-		def initialize(input)
-			input << self
-
-			@buttons = []
-		end
 
 		def direction
-			@buttons.find { |b| Utils::Directions.include? b }
-		end
-
-		def pressed
-			@buttons.first
-		end
-
-		def down(input, id)
-			up(input, id)
-			@buttons.unshift id
-			Utils::Logger::log("after down(:#{id}) is [#{@buttons.map {|e| ":#{e}"}.join(', ')}], dir = :#{direction}")
-		end
-
-		def up(input, id)
-			@buttons.delete id if down? id
-			Utils::Logger::log("after up(:#{id}) is [#{@buttons.map {|e| ":#{e}"}.join(', ')}], dir = :#{direction}")
-		end
-
-		def down?(id)
-			@buttons.include? id
+			@input.buttons.find { |b| Utils::Directions.include? b }
 		end
 	end
 
 	class PlayerInput < Component
 		def update(delta)
 			unless object.controller.active?
-				d = object.input.direction
+				d = object.direction
 				if d == object.model.facing
 					object.controller.add(PlayerMoveAction.new(object, object.input.down?(:B) ? :running : :walking), :player)
 				elsif d
 					object.controller.add(FailedMoveAction.new(object, d, 25), :player)
 				end
 			end
+		end
+
+		def down(input, id)
+			if id == :A
+				object.controller.add(PlayerInteractAction.new(object), :script)
+			elsif id == :start
+			end
+		end
+	end
+
+	class PlayerInteractAction < Entity::Action
+		def enter
+			entity.controller.clear
+			dx, dy = *Utils::direction(entity.model.facing)
+			$world.player_interact(entity.px + dx, entity.py + dy)
 		end
 	end
 
@@ -99,7 +87,7 @@ module Pokemon
 			
 				@done = true
 				unless entity.controller.queued?
-					dir = entity.input.direction
+					dir = entity.direction
 					if dir and dir != entity.model.facing
 						entity.model.facing = dir
 						entity.controller.override(PlayerMoveAction.new(entity, @speed_id))
@@ -149,7 +137,7 @@ module Pokemon
 
 		def update(delta)
 			super
-			d = entity.input.direction 
+			d = entity.direction 
 			if d and d != entity.model.facing
 				@done = true
 			end

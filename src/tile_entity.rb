@@ -66,6 +66,9 @@ module Pokemon
 		end
 
 		class Water < Base
+			def interact
+			end
+
 			def can_enter(entity, tile)
 				tile == self
 			end

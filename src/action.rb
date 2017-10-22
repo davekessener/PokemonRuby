@@ -24,6 +24,22 @@ module Pokemon
 			end
 		end
 
+		class ConditionalAction < Action
+			def initialize(entity, callback = nil, &cond)
+				super(entity)
+				@callback = callback
+				@condition = cond
+			end
+
+			def exit
+				@callback.call if @callback
+			end
+
+			def done?
+				@done ||= (not @condition) or @condition.call
+			end
+		end
+
 		class TimedAction < Action
 			def initialize(entity, duration)
 				super(entity)
