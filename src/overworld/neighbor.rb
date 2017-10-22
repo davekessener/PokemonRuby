@@ -1,5 +1,5 @@
 module Pokemon
-	module Utils
+	module Overworld
 		class Neighbor
 			def initialize(this, id, d, offset)
 				@this = this
@@ -9,7 +9,7 @@ module Pokemon
 			end
 
 			def map
-				@map ||= Map[@id]
+				@map ||= Overworld::Map[@id]
 			end
 
 			def dx

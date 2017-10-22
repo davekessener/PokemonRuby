@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	class Tileset
 		include Utils::DynamicLoad
 
@@ -50,3 +51,4 @@ module Pokemon
 	end
 end
 
+end

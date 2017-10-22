@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	class Tilemap
 		include Utils::DynamicLoad
 
@@ -62,3 +63,4 @@ module Pokemon
 	end
 end
 
+end

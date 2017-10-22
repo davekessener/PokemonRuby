@@ -92,6 +92,8 @@ module Pokemon
 				end
 			end
 
+			private
+
 			def set_active(a)
 				@active.base = @empty if @active
 				@active = a

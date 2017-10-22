@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	module TileEntity
 		class Base
 			def initialize
@@ -133,3 +134,4 @@ module Pokemon
 	end
 end
 
+end

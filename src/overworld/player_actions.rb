@@ -1,43 +1,6 @@
 module Pokemon
-	class Player < Entity::Base
-		attr_reader :input
-
-		def initialize(input, data)
-			super(data['x'], data['y'])
-			@input = input
-			@input << PlayerInput.new(self)
-
-			model.sprite = Sprite['gold']
-			model.facing = data['facing'].to_sym
-			self.corporal = true
-		end
-
-		def direction
-			@input.buttons.find { |b| Utils::Directions.include? b }
-		end
-	end
-
-	class PlayerInput < Component
-		def update(delta)
-			unless object.controller.active?
-				d = object.direction
-				if d == object.model.facing
-					object.controller.add(PlayerMoveAction.new(object, object.input.down?(:B) ? :running : :walking), :player)
-				elsif d
-					object.controller.add(FailedMoveAction.new(object, d, 25), :player)
-				end
-			end
-		end
-
-		def down(input, id)
-			if id == :A
-				object.controller.add(PlayerInteractAction.new(object), :script)
-			elsif id == :start
-			end
-		end
-	end
-
-	class PlayerInteractAction < Entity::Action
+module Overworld
+	class PlayerInteractAction < Action::Base
 		def enter
 			entity.controller.clear
 			dx, dy = *Utils::direction(entity.model.facing)
@@ -45,7 +8,7 @@ module Pokemon
 		end
 	end
 
-	class PlayerMoveAction < Entity::Action
+	class PlayerMoveAction < Action::Base
 		def initialize(player, speed)
 			super(player)
 			@speed_id = speed
@@ -120,7 +83,7 @@ module Pokemon
 		end
 	end
 
-	class FailedMoveAction < Entity::TimedAction
+	class FailedMoveAction < Action::Timed
 		def initialize(player, dir, duration)
 			super(player, duration)
 			@direction = dir
@@ -137,11 +100,13 @@ module Pokemon
 
 		def update(delta)
 			super
+			entity.model.progress = progress
 			d = entity.direction 
 			if d and d != entity.model.facing
 				@done = true
 			end
 		end
 	end
+end
 end
 

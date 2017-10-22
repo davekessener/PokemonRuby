@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	module Sprite
 		class Frame
 			def initialize(data, cols)
@@ -63,3 +64,4 @@ module Pokemon
 	end
 end
 
+end

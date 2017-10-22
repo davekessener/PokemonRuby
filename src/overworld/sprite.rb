@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	module Sprite
 		class Base
 			include Utils::DynamicLoad
@@ -42,3 +43,4 @@ module Pokemon
 	end
 end
 
+end

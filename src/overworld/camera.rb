@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	class Camera
 		attr_accessor :following
 
@@ -28,3 +29,4 @@ module Pokemon
 	end
 end
 
+end

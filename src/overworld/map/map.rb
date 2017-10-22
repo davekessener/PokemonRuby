@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	module Map
 		def self.[](id)
 			Container[id]
@@ -127,7 +128,7 @@ module Pokemon
 
 				@neighbors = {}
 				data['neighbors'].each do |d, n|
-					@neighbors[d.to_sym] = Utils::Neighbor.new(self, n['id'], d, n['offset'])
+					@neighbors[d.to_sym] = Neighbor.new(self, n['id'], d, n['offset'])
 				end
 
 				@entities = {}
@@ -152,3 +153,4 @@ module Pokemon
 	end
 end
 
+end

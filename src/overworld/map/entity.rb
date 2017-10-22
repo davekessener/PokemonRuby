@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	module Map
 		class Entity < Entity::Base
 			attr_reader :id
@@ -46,30 +47,7 @@ module Pokemon
 				@controller << ConditionalAction.new(self, lambda { @ai.unfreeze }) { not $world.script_running? }
 			end
 		end
-
-		module Template
-			def self.[](id)
-				@@templates ||= {
-					'text' => Textbox
-				}
-				@@templates[id]
-			end
-
-			class Textbox
-				def initialize(args)
-					@content = Text[args]
-					@script = Script::List.new([
-						Script::OpenTextboxAction.new(@content),
-						Script::WaitForUI.new,
-						Script::CloseWindowsAction.new
-					])
-				end
-
-				def instantiate(id, x, y)
-					TextEntity.new(id, x, y, @script)
-				end
-			end
-		end
 	end
 end
 
+end

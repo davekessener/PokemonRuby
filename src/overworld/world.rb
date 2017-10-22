@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	class World
 		attr_reader :player, :player_input
 
@@ -31,7 +32,7 @@ module Pokemon
 		def update(delta)
 			@map.update(delta)
 			@pool.update(delta)
-			update_script(delta) if script_running?
+			update_script if script_running?
 		end
 
 		def draw
@@ -97,8 +98,8 @@ module Pokemon
 			@entities.each { |id, e| @pool.add(e) }
 		end
 
-		def update_script(delta)
-			@script.update(delta)
+		def update_script
+			@script.tick
 			if @script.done?
 				@script_input.delete @script
 				@scipt = nil
@@ -108,3 +109,4 @@ module Pokemon
 	end
 end
 
+end

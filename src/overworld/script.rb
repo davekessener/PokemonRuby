@@ -1,7 +1,8 @@
 module Pokemon
+module Overworld
 	module Script
 		class Base
-			def update(delta)
+			def tick
 			end
 
 			def done?
@@ -24,10 +25,11 @@ module Pokemon
 				@active = 0
 			end
 
-			def update(delta)
-				unless done?
-					@lines[@active].update(delta)
-					@active += 1 if @lines[@active].done?
+			def tick
+				while not done?
+					@lines[@active].tick
+					break unless @lines[@active].done?
+					@active += 1
 				end
 			end
 
@@ -50,7 +52,7 @@ module Pokemon
 		end
 
 		class Action < Base
-			def update(delta)
+			def tick
 				act unless done?
 				@done = true
 			end
@@ -94,6 +96,17 @@ module Pokemon
 				$ui.close_all
 			end
 		end
+
+		class TextboxScript < Script::List
+			def initialize(content)
+				super([
+					Script::OpenTextboxAction.new(content),
+					Script::WaitForUI.new,
+					Script::CloseWindowsAction.new
+				])
+			end
+		end
 	end
 end
 
+end

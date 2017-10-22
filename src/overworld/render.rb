@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	module Render
 		def self.[](id)
 			@@default_renderer ||= Base.new
@@ -31,3 +32,4 @@ module Pokemon
 	end
 end
 
+end

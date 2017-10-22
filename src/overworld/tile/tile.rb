@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	module Tile
 		class Static
 			def initialize(img)
@@ -23,3 +24,4 @@ module Pokemon
 	end
 end
 
+end

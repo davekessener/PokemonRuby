@@ -1,4 +1,5 @@
 module Pokemon
+module Overworld
 	class OverworldScene < Scene
 		def enter
 			$world.player_input.activate
@@ -18,3 +19,4 @@ module Pokemon
 	end
 end
 
+end
