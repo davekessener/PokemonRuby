@@ -7,6 +7,18 @@
 			"id" : "route_29",
 			"offset" : 0
 		}
-	}
+	},
+	"entities" : [
+		{
+			"id" : "technology_man",
+			"type" : "npc",
+			"at" : [ 14, 8 ],
+			"argument" : {
+				"sprite" : "fat_man",
+				"text" : "new_bark_town:technology",
+				"ai" : "random:3,500,0.1"
+			}
+		}
+	]
 }
 

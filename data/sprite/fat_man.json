@@ -1,0 +1,130 @@
+{
+	"source" : "fat_man.png",
+	"width" : 16,
+	"height" : 16,
+	"group" : [
+		{
+			"id" : "shadow",
+			"at" : [2, 2]
+		},
+		{
+			"id" : "down",
+			"default" : true,
+			"group" : [
+				{
+					"id" : "standing",
+					"default" : true,
+					"at" : [0, 0]
+				},
+				{
+					"id" : "walking",
+					"alias" : [ "running" ],
+					"alternatives" : [
+						{
+							"default" : true,
+							"frames" : [
+								{
+									"at" : [0, 0]
+								},
+								{
+									"at" : [1, 0]
+								}
+							]
+						},
+						{
+							"frames" : [
+								{
+									"at" : [0, 0]
+								},
+								{
+									"at" : [2, 0]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id" : "up",
+			"group" : [
+				{
+					"id" : "standing",
+					"default" : true,
+					"at" : [0, 1]
+				},
+				{
+					"id" : "walking",
+					"alias" : [ "running" ],
+					"alternatives" : [
+						{
+							"default" : true,
+							"frames" : [
+								{
+									"at" : [0, 1]
+								},
+								{
+									"at" : [1, 1]
+								}
+							]
+						},
+						{
+							"frames" : [
+								{
+									"at" : [0, 1]
+								},
+								{
+									"at" : [2, 1]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id" : "left",
+			"group" : [
+				{
+					"id" : "standing",
+					"default" : true,
+					"at" : [0, 2]
+				},
+				{
+					"id" : "walking",
+					"alias" : [ "running" ],
+					"frames" : [
+						{
+							"at" : [0, 2]
+						},
+						{
+							"at" : [1, 2]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id" : "right",
+			"group" : [
+				{
+					"id" : "standing",
+					"default" : true,
+					"at" : [0, 3]
+				},
+				{
+					"id" : "walking",
+					"alias" : [ "running" ],
+					"frames" : [
+						{
+							"at" : [0, 3]
+						},
+						{
+							"at" : [1, 3]
+						}
+					]
+				}
+			]
+		}
+	]
+}

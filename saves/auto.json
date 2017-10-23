@@ -1,6 +1,7 @@
 {
-	"map" : "route_29",
-	"x" : 15,
+	"name" : "GOLD",
+	"map" : "new_bark_town",
+	"x" : 10,
 	"y" : 9,
 	"facing" : "left"
 }

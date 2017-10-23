@@ -41,6 +41,24 @@ module Pokemon
 			@@directions.fetch(id, Vec2.new(0, 0))
 		end
 
+		def self.get_direction(dx, dy)
+			return :left if dx == -1 and dy == 0
+			return :right if dx == 1 and dy == 0
+			return :up if dx == 0 and dy == -1
+			return :down if dx == 0 and dy == 1
+			raise "not a valid direction! #{v}"
+		end
+
+		def self.opposite(dir)
+			@@opposites ||= {
+				left: :right,
+				right: :left,
+				up: :down,
+				down: :up
+			}
+			@@opposites[dir]
+		end
+
 		def self.speed(id)
 			@@speeds ||= {
 				walking: 56,

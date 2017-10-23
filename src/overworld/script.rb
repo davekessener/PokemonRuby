@@ -79,7 +79,6 @@ module Overworld
 		class WaitForUI < Base
 			def down(input, id)
 				@done = (id == :A or id == :B)
-				puts "received input :#{id}!"
 			end
 
 			def done?

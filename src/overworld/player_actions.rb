@@ -64,7 +64,7 @@ module Overworld
 					entity.model.dy -= dy
 				
 					if entity.input.down? entity.model.facing
-						if $world.can_move_to(entity, px, py)
+						if $world.can_player_move?(entity, px, py)
 							$world.move_player(px, py)
 							update_speed(entity.input.down?(:B) ? :running : :walking)
 							@done = false

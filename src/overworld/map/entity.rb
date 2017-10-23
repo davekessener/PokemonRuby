@@ -35,16 +35,19 @@ module Overworld
 		end
 
 		class NPCEntity < Entity
-			def initialize(id, x, y, script, sprite, ai)
+			def initialize(id, x, y, sprite, script, ai)
 				super(id, x, y, script)
-				model.sprite = sprite
 				@ai = NPCController.new(self, ai)
+
+				self.model.sprite = sprite
+				self.corporal = true
 			end
 
 			def interact
 				activate
 				@ai.freeze
-				@controller << ConditionalAction.new(self, lambda { @ai.unfreeze }) { not $world.script_running? }
+				controller << Overworld::Entity::TurnAction.new(self, Utils::opposite($world.player.model.facing))
+				controller << Action::Conditional.new(self, lambda { @ai.unfreeze }) { not $world.script_running? }
 			end
 		end
 	end

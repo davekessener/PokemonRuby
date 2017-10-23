@@ -14,6 +14,7 @@ module Pokemon
 			end
 
 			def interrupt
+				self.exit
 			end
 
 			def update(delta)

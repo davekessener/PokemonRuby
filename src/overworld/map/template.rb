@@ -4,7 +4,8 @@ module Overworld
 		module Template
 			def self.[](id)
 				@@templates ||= {
-					'text' => Textbox
+					'text' => Textbox,
+					'npc' => NPC
 				}
 				@@templates[id]
 			end
@@ -24,11 +25,16 @@ module Overworld
 					@sprite = Sprite[args['sprite']] if args['sprite']
 					if args['script']
 					elsif args['text']
-						@script = TextboxScript.new(Text[args['text']])
+						@script = Script::TextboxScript.new(Text[args['text']])
 					end
 					if args['ai']
+						@ai = AI[args['ai']]
 					elsif args['movement']
 					end
+				end
+
+				def instantiate(id, x, y)
+					NPCEntity.new(id, x, y, @sprite, @script, @ai)
 				end
 			end
 		end

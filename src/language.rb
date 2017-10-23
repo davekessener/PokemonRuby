@@ -1,5 +1,20 @@
 module Pokemon
 	module Text
+		def self.globals
+			@@globals ||= {}
+		end
+
+		class Evaluator < BasicObject
+			def method_missing(name)
+				g = ::Pokemon::Text::globals
+				if g[name.to_sym]
+					g[name.to_sym].to_s
+				else
+					super
+				end
+			end
+		end
+
 		class Language
 			include Utils::DynamicLoad
 
@@ -10,7 +25,11 @@ module Pokemon
 					t = t[id]
 				end
 
-				t ? t.to_s : 'undefined'
+				if t
+					Evaluator.new.instance_eval "\"#{t}\""
+				else
+					'undefined'
+				end
 			end
 
 			private_class_method :new

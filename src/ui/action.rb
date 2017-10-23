@@ -1,7 +1,7 @@
 module Pokemon
 	module UI
 		class DisplayTextAction < Action::Base
-			def initialize(entity, text, speed = 75)
+			def initialize(entity, text, speed = 30)
 				super(entity)
 				@text = text.split(//)
 				@left = @speed = speed

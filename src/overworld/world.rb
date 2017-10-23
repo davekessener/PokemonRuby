@@ -9,8 +9,8 @@ module Overworld
 		end
 
 		def load(data)
-			@map = Map[data['map']]
 			@player = Player.new(@player_input, data)
+			@map = Map[data['map']]
 			@camera = Camera.new(@player.model)
 			load_entities
 			@map.enter
@@ -55,13 +55,17 @@ module Overworld
 			@map.renderer_at(px, py)
 		end
 
+		def can_move?(entity, px, py)
+			not @map.out_of_bounds?(px, py) and can_player_move?(entity, px, py)
+		end
+
 		def tile_size
 			@map.tile_size
 		end
 
-		def can_move_to(entity, px, py)
+		def can_player_move?(player, px, py)
 			return false if @pool.any? { |e| e.corporal and e.px == px and e.py == py }
-			@map.can_move_to(entity, px, py)
+			@map.can_move_to(player, px, py)
 		end
 
 		def move_entity(e, px, py)
@@ -102,7 +106,7 @@ module Overworld
 			@script.tick
 			if @script.done?
 				@script_input.delete @script
-				@scipt = nil
+				@script = nil
 				@script_input.deactivate
 			end
 		end

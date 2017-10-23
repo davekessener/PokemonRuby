@@ -1,16 +1,18 @@
 module Pokemon
 module Overworld
 	class Player < Entity::Base
-		attr_reader :input
+		attr_reader :input, :name
 
 		def initialize(input, data)
 			super(data['x'], data['y'])
 			@input = input
 			@input << PlayerInput.new(self)
+			@name = data['name']
 
 			model.sprite = Sprite['gold']
 			model.facing = data['facing'].to_sym
 			self.corporal = true
+			Text::globals[:player] = @name
 		end
 
 		def direction
