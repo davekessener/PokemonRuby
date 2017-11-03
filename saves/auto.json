@@ -1,7 +1,8 @@
 {
-	"name" : "GOLD",
-	"map" : "new_bark_town",
-	"x" : 10,
+	"name" : "Daiki",
+	"sprite" : "leaf",
+	"map" : "pallet_town",
+	"x" : 12,
 	"y" : 9,
 	"facing" : "left"
 }

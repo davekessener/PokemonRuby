@@ -1,0 +1,39 @@
+{
+  "tileset": "gen3",
+  "width": 2,
+  "height": 2,
+  "map": {
+    "bottom": [
+      [
+        [
+          "ground:4",
+          "ground:4"
+        ],
+        [
+          "tree:bottom:left",
+          "tree:bottom:right"
+        ]
+      ],
+      [
+        [
+          "tree:middle:left",
+          "tree:middle:right"
+        ],
+        [
+          "tree:top:left",
+          "tree:top:right"
+        ]
+      ]
+    ]
+  },
+  "meta": [
+    [
+      "wall",
+      "wall"
+    ],
+    [
+      "wall",
+      "wall"
+    ]
+  ]
+}

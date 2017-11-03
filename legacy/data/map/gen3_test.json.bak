@@ -1,0 +1,14 @@
+{
+  "name": "Gen 3 Test Map",
+  "map": "gen3_test",
+  "border": "gen3_trees",
+  "neighbors": {
+    "down": {
+      "id": "cherrygrove_city",
+      "offset": -10
+    }
+  },
+  "entities": [
+    
+  ]
+}

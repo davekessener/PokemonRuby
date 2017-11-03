@@ -23,9 +23,9 @@ module Overworld
 
 		class BasicModel
 			attr_accessor :dx, :dy, :dz, :z, :sprite
-			attr_accessor :state, :type, :animation
+			attr_accessor :state, :type
 			attr_accessor :progress
-			attr_reader :facing
+			attr_reader :facing, :animation
 
 			def initialize(entity)
 				@entity = entity
@@ -42,6 +42,10 @@ module Overworld
 			def facing=(id)
 				raise ArgumentError, "The only valid directions are #{Utils::Directions.join(', ')}!" unless Utils::Directions.include? id
 				@facing = id
+			end
+
+			def animation=(a)
+				@animation = a.abs
 			end
 
 			def reset(*vars)

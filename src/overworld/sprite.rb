@@ -14,7 +14,7 @@ module Overworld
 
 			def centered(&block)
 				l = $world.tile_size
-				Gosu::translate((l - @width) / 2, 3 * l / 4 - @height, &block) if block_given?
+				Gosu::translate((l - @width) / 2, @offset - (@height - l), &block) if block_given?
 			end
 
 			private_class_method :new
@@ -27,6 +27,7 @@ module Overworld
 				@width, @height = data['width'], data['height']
 				@source, cols, _ = *Utils::load_tiles(fn, @width, @height)
 				@frames = Frame.new(data, cols)
+				@offset = data['offset']
 
 				@width *= Utils::SCREEN_SCALE
 				@height *= Utils::SCREEN_SCALE

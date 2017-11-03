@@ -1,0 +1,11 @@
+{
+  "name": "Pallet Town",
+  "map": "pallet_town",
+  "border": "forest",
+  "neighbors": {
+    "up": {
+      "id": "route_01",
+      "offset": 0
+    }
+  }
+}

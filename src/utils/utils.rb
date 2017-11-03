@@ -31,6 +31,10 @@ module Pokemon
 			end
 		end
 
+		def self.layers
+			@@layers ||= [:bottom, :top]
+		end
+
 		def self.direction(id)
 			@@directions ||= {
 				left: Vec2.new(-1, 0),

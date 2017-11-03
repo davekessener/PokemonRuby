@@ -1,0 +1,478 @@
+{
+  "size": 16,
+  "source": "tileset.png",
+  "tiles": [
+    {
+      "id": "tree:top",
+      "at": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "tree:bottom",
+      "at": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "tree:small",
+      "at": [
+        1,
+        0
+      ]
+    },
+    {
+      "id": "grass",
+      "at": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "ground",
+      "at": [
+        2,
+        0
+      ]
+    },
+    {
+      "id": "sign",
+      "at": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "door",
+      "at": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "roof:small:left",
+      "at": [
+        3,
+        0
+      ]
+    },
+    {
+      "id": "roof:small:middle",
+      "at": [
+        4,
+        0
+      ]
+    },
+    {
+      "id": "roof:small:right",
+      "at": [
+        5,
+        0
+      ]
+    },
+    {
+      "id": "roof:top:left",
+      "at": [
+        6,
+        0
+      ]
+    },
+    {
+      "id": "roof:top:middle",
+      "at": [
+        7,
+        0
+      ]
+    },
+    {
+      "id": "roof:top:right",
+      "at": [
+        8,
+        0
+      ]
+    },
+    {
+      "id": "roof:middle:left",
+      "at": [
+        6,
+        1
+      ]
+    },
+    {
+      "id": "roof:middle:middle",
+      "at": [
+        7,
+        1
+      ]
+    },
+    {
+      "id": "roof:middle:right",
+      "at": [
+        8,
+        1
+      ]
+    },
+    {
+      "id": "roof:bottom:left",
+      "at": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "roof:bottom:middle",
+      "at": [
+        4,
+        1
+      ]
+    },
+    {
+      "id": "roof:bottom:right",
+      "at": [
+        5,
+        1
+      ]
+    },
+    {
+      "id": "house:middle:left",
+      "at": [
+        6,
+        2
+      ]
+    },
+    {
+      "id": "house:middle:middle",
+      "at": [
+        7,
+        2
+      ]
+    },
+    {
+      "id": "house:middle:right",
+      "at": [
+        8,
+        2
+      ]
+    },
+    {
+      "id": "house:bottom:left",
+      "at": [
+        3,
+        2
+      ]
+    },
+    {
+      "id": "house:bottom:middle",
+      "at": [
+        4,
+        2
+      ]
+    },
+    {
+      "id": "house:bottom:right",
+      "at": [
+        5,
+        2
+      ]
+    },
+    {
+      "id": "house:lamp:left:wall",
+      "at": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "house:lamp:left:middle",
+      "at": [
+        3,
+        3
+      ]
+    },
+    {
+      "id": "house:lamp:right:wall",
+      "at": [
+        5,
+        3
+      ]
+    },
+    {
+      "id": "house:lamp:right:middle",
+      "at": [
+        4,
+        3
+      ]
+    },
+    {
+      "id": "flower:bottom",
+      "period": 500,
+      "frames": [
+        {
+          "at": [
+            0,
+            2
+          ]
+        },
+        {
+          "at": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flower:top",
+      "period": 500,
+      "frames": [
+        {
+          "at": [
+            0,
+            3
+          ]
+        },
+        {
+          "at": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "water",
+      "period": 250,
+      "frames": [
+        {
+          "at": [
+            0,
+            4
+          ]
+        },
+        {
+          "at": [
+            1,
+            4
+          ]
+        },
+        {
+          "at": [
+            2,
+            4
+          ]
+        },
+        {
+          "at": [
+            3,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shore:corner:topleft",
+      "at": [
+        9,
+        0
+      ]
+    },
+    {
+      "id": "shore:up",
+      "at": [
+        10,
+        0
+      ]
+    },
+    {
+      "id": "shore:left",
+      "at": [
+        9,
+        1
+      ]
+    },
+    {
+      "id": "ledge:left",
+      "at": [
+        11,
+        0
+      ]
+    },
+    {
+      "id": "ledge:bottom",
+      "at": [
+        12,
+        1
+      ]
+    },
+    {
+      "id": "ledge:right",
+      "at": [
+        13,
+        0
+      ]
+    },
+    {
+      "id": "ledge:corner:bottomleft",
+      "at": [
+        11,
+        1
+      ]
+    },
+    {
+      "id": "ledge:corner:bottomright",
+      "at": [
+        13,
+        1
+      ]
+    },
+    {
+      "id": "tall_grass",
+      "at": [
+        0,
+        5
+      ]
+    },
+    {
+      "id": "mountain:top:left",
+      "at": [
+        14,
+        0
+      ]
+    },
+    {
+      "id": "mountain:top:middle",
+      "at": [
+        15,
+        0
+      ]
+    },
+    {
+      "id": "mountain:top:right",
+      "at": [
+        16,
+        0
+      ]
+    },
+    {
+      "id": "mountain:middle:left",
+      "at": [
+        14,
+        1
+      ]
+    },
+    {
+      "id": "mountain:middle:middle",
+      "at": [
+        15,
+        1
+      ]
+    },
+    {
+      "id": "mountain:middle:right",
+      "at": [
+        16,
+        1
+      ]
+    },
+    {
+      "id": "mountain:bottom:left",
+      "at": [
+        14,
+        2
+      ]
+    },
+    {
+      "id": "mountain:bottom:middle",
+      "at": [
+        15,
+        2
+      ]
+    },
+    {
+      "id": "mountain:bottom:right",
+      "at": [
+        16,
+        2
+      ]
+    },
+    {
+      "id": "roof:brown:top:left",
+      "at": [
+        6,
+        3
+      ]
+    },
+    {
+      "id": "roof:brown:top:middle",
+      "at": [
+        7,
+        3
+      ]
+    },
+    {
+      "id": "roof:brown:top:right",
+      "at": [
+        8,
+        3
+      ]
+    },
+    {
+      "id": "roof:brown:bottom:left",
+      "at": [
+        6,
+        4
+      ]
+    },
+    {
+      "id": "roof:brown:bottom:middle",
+      "at": [
+        7,
+        4
+      ]
+    },
+    {
+      "id": "roof:brown:bottom:right",
+      "at": [
+        8,
+        4
+      ]
+    },
+    {
+      "id": "fence",
+      "at": [
+        1,
+        5
+      ]
+    },
+    {
+      "id": "warp:top",
+      "at": [
+        2,
+        5
+      ]
+    },
+    {
+      "id": "cave",
+      "at": [
+        3,
+        5
+      ]
+    },
+    {
+      "id": "mountain:corner:left",
+      "at": [
+        4,
+        4
+      ]
+    },
+    {
+      "id": "mountain:corner:right",
+      "at": [
+        5,
+        4
+      ]
+    }
+  ]
+}

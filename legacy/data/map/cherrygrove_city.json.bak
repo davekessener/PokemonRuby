@@ -1,0 +1,11 @@
+{
+  "name": "Cherrygrove City",
+  "map": "cherrygrove_city",
+  "border": "trees",
+  "neighbors": {
+    "right": {
+      "id": "route_29",
+      "offset": 0
+    }
+  }
+}

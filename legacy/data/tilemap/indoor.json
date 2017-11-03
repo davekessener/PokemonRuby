@@ -1,0 +1,16 @@
+{
+	"tileset" : "overworld",
+	"width" : 1,
+	"height" : 1,
+	"map" : {
+		"background" : [
+			[
+				[ null ]
+			]
+		]
+	},
+	"meta" : [
+		[ "wall" ]
+	]
+}
+

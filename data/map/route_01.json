@@ -1,0 +1,11 @@
+{
+  "name": "Route 01",
+  "map": "route_01",
+  "border": "forest",
+  "neighbors": {
+    "down": {
+      "id": "pallet_town",
+      "offset": 0
+    }
+  }
+}

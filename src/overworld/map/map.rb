@@ -29,7 +29,7 @@ module Overworld
 						if map.is_a? self.class
 							map.tiles[px][py].draw(x * l, y * l)
 						else
-							map.draw(px, py, x * l, y * l, :background)
+							map.draw(px, py, x * l, y * l)
 						end
 					end
 				end
@@ -98,19 +98,12 @@ module Overworld
 			end
 
 			def from_coords(px, py)
-				d = out_of_bounds? px, py
-				if d
-					n = @neighbors[d]
-					if n
+				if out_of_bounds? px, py
+					@neighbors.each do |d, n|
 						ppx, ppy = px + n.dx, py + n.dy
-						if n.map.out_of_bounds? ppx, ppy
-							[@border, *oob_coords(px, py)]
-						else
-							[n.map, ppx, ppy]
-						end
-					else
-						[@border, *oob_coords(px, py)]
+						return [n.map, ppx, ppy] if not n.map.out_of_bounds? ppx, ppy
 					end
+					[@border, *oob_coords(px, py)]
 				else
 					[self, px, py]
 				end
@@ -129,7 +122,7 @@ module Overworld
 				@neighbors = {}
 				data['neighbors'].each do |d, n|
 					@neighbors[d.to_sym] = Neighbor.new(self, n['id'], d, n['offset'])
-				end
+				end if data['neighbors']
 
 				@entities = {}
 				data['entities'].each do |e|

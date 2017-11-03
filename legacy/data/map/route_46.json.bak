@@ -1,0 +1,14 @@
+{
+	"name" : "Route 46",
+	"map" : "route_46",
+	"border" : "trees",
+	"neighbors" : {
+		"down" : {
+			"id" : "route_29",
+			"offset" : -20
+		}
+	},
+	"entities" : [
+	]
+}
+

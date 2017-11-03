@@ -19,18 +19,18 @@ module Pokemon
 					when :right
 						-@this.width
 					when :up
-						@offset
+						-@offset
 					when :down
-						@offset
+						-@offset
 				end
 			end
 
 			def dy
 				@dy ||= case @dir
 					when :left
-						@offset
+						-@offset
 					when :right
-						@offset
+						-@offset
 					when :up
 						map.height
 					when :down

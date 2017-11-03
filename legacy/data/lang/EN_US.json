@@ -1,0 +1,9 @@
+{
+	"route_29" : {
+		"sign" : "ROUTE 29\rCHERRYGROVE CITY -\nNEW BARK TOWN"
+	},
+	"new_bark_town" : {
+		"technology" : "Yo, #{player}!\rI hear PROF.ELM discovered\nsome new POK@MON."
+	}
+}
+

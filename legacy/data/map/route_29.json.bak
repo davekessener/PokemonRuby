@@ -6,6 +6,10 @@
 		"right" : {
 			"id" : "new_bark_town",
 			"offset" : 0
+		},
+		"up" : {
+			"id" : "route_46",
+			"offset" : 20
 		}
 	},
 	"entities" : [

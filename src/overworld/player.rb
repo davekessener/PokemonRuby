@@ -9,7 +9,7 @@ module Overworld
 			@input << PlayerInput.new(self)
 			@name = data['name']
 
-			model.sprite = Sprite['gold']
+			model.sprite = Sprite[data['sprite']]
 			model.facing = data['facing'].to_sym
 			self.corporal = true
 			Text::globals[:player] = @name

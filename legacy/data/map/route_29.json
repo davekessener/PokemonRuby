@@ -1,0 +1,39 @@
+{
+  "name": "Route 29",
+  "map": "route_29",
+  "border": "trees",
+  "neighbors": {
+    "up": {
+      "id": "route_46",
+      "offset": 20
+    },
+    "left": {
+      "id": "cherrygrove_city",
+      "offset": 0
+    },
+    "right": {
+      "id": "new_bark_town",
+      "offset": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "sign_1",
+      "type": "text",
+      "argument": "route_29:sign",
+      "at": [
+        3,
+        5
+      ]
+    },
+    {
+      "id": "sign_2",
+      "type": "text",
+      "argument": "route_29:sign",
+      "at": [
+        51,
+        7
+      ]
+    }
+  ]
+}

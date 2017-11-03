@@ -14,7 +14,7 @@ module Overworld
 				Array.new(@height) do |y|
 					e = TileEntity[@meta[y][x].to_sym]
 
-					[:background, :bottom, :top].each do |z_id|
+					Utils::layers.each do |z_id|
 						z = Utils::get_z(z_id)
 					
 						@maps[z_id].each do |l|
@@ -27,10 +27,12 @@ module Overworld
 			end
 		end
 
-		def draw(px, py, x, y, z_id)
-			z = Utils::get_z(z_id)
-			@maps[z_id].each do |layer|
-				layer[px][py].draw(x, y, z) if layer[px][py]
+		def draw(px, py, x, y)
+			Utils::layers.each do |z_id|
+				z = Utils::get_z(z_id)
+				@maps[z_id].each do |layer|
+					layer[px][py].draw(x, y, z) if layer[px][py]
+				end
 			end
 		end
 
@@ -41,17 +43,20 @@ module Overworld
 		def load_data(data)
 			@width, @height = data['width'], data['height']
 			@tileset = Tileset[data['tileset']]
-			@maps = {background: [], bottom: [], top: []}
+			@maps = {}
 			@meta = []
 
-			data['map'].each do |map|
-				order, layer = map['order'].to_sym, map['layer']
+			map = data['map']
+			Utils::layers.each do |z_id|
+				@maps[z_id] = []
 
-				@maps[order] << Array.new(@width) do |x|
-					Array.new(@height) do |y|
-						layer[y][x] ? @tileset[layer[y][x]] : nil
+				@maps[z_id] = map[z_id.to_s].map do |layer|
+					Array.new(@width) do |x|
+						Array.new(@height) do |y|
+							layer[y][x] ? @tileset[layer[y][x]] : nil
+						end
 					end
-				end
+				end if map[z_id.to_s]
 			end
 
 			@meta = data['meta']
