@@ -1,7 +1,8 @@
 {
 	"name" : "Daiki",
+	"rival" : "Taiga",
 	"sprite" : "leaf",
-	"map" : "pallet_town",
+	"map" : "overworld:pallet_town",
 	"x" : 12,
 	"y" : 9,
 	"facing" : "left"

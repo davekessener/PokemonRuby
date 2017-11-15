@@ -75,7 +75,7 @@ module Overworld
 					end
 
 					if $world.can_move? object, object.px + dx, object.py + dy
-						object.controller << Overworld::Entity::WalkAction.new(object, Utils::get_direction(dx, dy))
+						object.controller.add(Overworld::Entity::WalkAction.new(object, Utils::get_direction(dx, dy)), :script)
 						@wandered[0] += dx
 						@wandered[1] += dy
 					else

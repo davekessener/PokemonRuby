@@ -3,27 +3,18 @@
 	"width" : 16,
 	"height" : 16,
 	"offset" : 0,
-	"group" : [
-		{
-			"id" : "standing",
-			"default" : true,
-			"at" : [0, 0]
-		},
-		{
-			"id" : "walking",
-			"alias" : [ "running" ],
-			"frames" : [
-				{
-					"at" : [1,0]
-				},
-				{
-					"at" : [2, 0]
-				},
-				{
-					"at" : [3, 0]
-				}
-			]
-		}
-	]
+	"sprite" : {
+		"group" : [
+			{
+				"id" : "standing",
+				"default" : true,
+				"at" : [0, 0]
+			},
+			{
+				"id" : "entering",
+				"at" : [0, 1]
+			}
+		]
+	}
 }
 

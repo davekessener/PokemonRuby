@@ -1,14 +1,39 @@
 module Pokemon
 module Overworld
 	module Entity
-		class Base < GameObject
+		class IEntity < GameObject
 			attr_accessor :px, :py
+
+			def initialize(px = 0, py = 0)
+				super()
+				@px, @py = px, py
+			end
+
+			def corporal
+				false
+			end
+
+			def interact
+			end
+
+			def trigger
+			end
+
+			def collide
+				false
+			end
+
+			def model
+				@model ||= IModel.new
+			end
+		end
+
+		class Base < IEntity
 			attr_accessor :model, :corporal
 			attr_reader :renderer, :controller
 
 			def initialize(x, y)
-				super()
-				@px, @py = x, y
+				super(x, y)
 				@controller = Action::Controller.new(self)
 				@model = BasicModel.new(self)
 				@renderer = ModelRenderer.new(self)
@@ -21,11 +46,34 @@ module Overworld
 			end
 		end
 
-		class BasicModel
-			attr_accessor :dx, :dy, :dz, :z, :sprite
+		class IModel
+			def x
+				0
+			end
+
+			def y
+				0
+			end
+
+			def z
+				0
+			end
+
+			def width
+				0
+			end
+
+			def height
+				0
+			end
+		end
+
+		class BasicModel < IModel
+			attr_accessor :dx, :dy, :dz, :sprite
 			attr_accessor :state, :type
 			attr_accessor :progress
-			attr_reader :facing, :animation
+			attr_reader :facing, :animation, :entity
+			attr_writer :z
 
 			def initialize(entity)
 				@entity = entity
@@ -65,6 +113,10 @@ module Overworld
 
 			def y
 				@dy + @entity.py * $world.tile_size
+			end
+
+			def z
+				@z + @entity.py
 			end
 
 			def width

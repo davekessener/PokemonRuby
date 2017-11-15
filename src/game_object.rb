@@ -1,28 +1,12 @@
 module Pokemon
-	class ObjectPool
-		def initialize
-			@pool = []
-		end
-
-		def <<(o)
-			@pool << o
-		end
-
+	class ObjectPool < Array
 		def update(delta)
-			@pool.each { |o| o.update(delta) }
-			@pool.reject! &:remove?
+			each { |o| o.update(delta) }
+			reject! &:remove?
 		end
 
 		def draw
-			@pool.each &:draw
-		end
-
-		def each(&block)
-			@pool.each(&block) if block_given?
-		end
-
-		def any?(&block)
-			@pool.any?(&block) if block_given?
+			each &:draw
 		end
 
 		alias_method :add, :<<

@@ -12,7 +12,6 @@ module Overworld
 			model.sprite = Sprite[data['sprite']]
 			model.facing = data['facing'].to_sym
 			self.corporal = true
-			Text::globals[:player] = @name
 		end
 
 		def direction

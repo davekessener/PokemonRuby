@@ -1,0 +1,16 @@
+{
+  "name": "Pallet Town",
+  "map": "pallet_town:player_house_1f",
+  "border": "indoors",
+  "entities" : [
+		{
+			"id" : "front_door",
+			"type" : "warp",
+			"argument" : {
+				"map" : "overworld:pallet_town",
+				"target" : "warp_player_house"
+			},
+			"at" : [ 3, 9 ]
+		}
+  ]
+}

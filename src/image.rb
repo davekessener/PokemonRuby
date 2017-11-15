@@ -2,6 +2,11 @@ module Pokemon
 	class Image
 		def initialize(source)
 			@source = source
+			self.scale = Utils::SCREEN_SCALE
+		end
+
+		def scale=(s)
+			@sx = @sy = s
 		end
 
 		def width
@@ -12,8 +17,11 @@ module Pokemon
 			@source.height
 		end
 
-		def draw(x, y, z)
-			@source.draw(x, y, z, Utils::SCREEN_SCALE, Utils::SCREEN_SCALE)
+		def draw(x, y, z, **args)
+			sx = args.fetch(:sx, 1.0) * @sx
+			sy = args.fetch(:sy, 1.0) * @sy
+			c  = args.fetch(:color, Gosu::Color::WHITE)
+			@source.draw(x, y, z, sx, sy, c)
 		end
 
 		def subimage(x, y, w, h)

@@ -71,14 +71,10 @@ module Pokemon
 				return if @active and @active.priority >= r.priority
 
 				set_active(r)
-
-				Utils::Logger::log("Activating input '#{@active.id}'.")
 			end
 
 			def deactivate(r)
 				return if r.active? or @active != r
-
-				Utils::Logger::log("Deactivating input '#{@active.id}'.")
 
 				@active.base = @empty
 				@active = nil
@@ -86,7 +82,6 @@ module Pokemon
 				@receivers.each do |recv|
 					if recv.active?
 						set_active(recv)
-						Utils::Logger::log("Activating input '#{@active.id}' instead.")
 						break
 					end
 				end

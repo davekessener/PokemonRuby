@@ -1,31 +1,51 @@
 module Pokemon
 	module UI
 		class Charset
-			attr_reader :char_width, :char_height
-
-			def initialize(id)
-				@id = id
-				@size = Utils::char_size
-				@char_width = @char_height = @size
-				fn = Utils::absolute_path(Utils::MEDIA_DIR, Utils::CHARSET_DIR, "#{id}.png")
-				@source = Gosu::Image::load_tiles(fn, @size, @size, { retro: true })
-			end
+			include Utils::DynamicLoad
 
 			def draw(s, x, y, z)
-				s.each_char do |c|
-					@source[translate(c)].draw(x, y, z)
-					x += @char_width
+				s.each do |ch, ci|
+					i, pc, sc = translate(ch), *@colors[ci]
+					@source[i].draw(x, y, z, color: pc)
+					@source[i + @size].draw(x, y, z, color: sc)
+					x += @char_widths[i]
+				end
+				x
+			end
+
+			def draw_plain(s, x, y, z)
+				draw(s.chars.map { |c| [c, 0] }, x, y, z)
+			end
+
+			def char_height
+				@tilesize
+			end
+
+			private_class_method :new
+
+			private
+
+			def translate(c)
+				c.ord - 32
+			end
+
+			def load_data(data)
+				fn = Utils::absolute_path(Utils::MEDIA_DIR, Utils::CHARSET_DIR, data['source'])
+				Utils::Logger::log("Loading charset '#{id}' from #{Utils::relative_path(fn)}.")
+				@tilesize, @size = data['tilesize'], data['size']
+				@source, _, _ = *Utils::load_tiles(fn, @tilesize)
+				@source.each { |img| img.scale = 1.0 }
+				@char_widths = data['widths']
+				
+				@colors = data['colors'].map do |c|
+					p = Gosu::Color.argb(0xff, *c['primary'])
+					s = Gosu::Color.argb(0xff, *c['secondary'])
+					[p, s]
 				end
 			end
 
-			def translate(c)
-				c.ord
-			end
-
-			def self.[](id)
-				@@charsets ||= {}
-				@@charsets[id] = Charset.new(id) unless @@charsets[id]
-				@@charsets[id]
+			def self.resource_path
+				[Utils::DATA_DIR, Utils::CHARSET_DIR]
 			end
 		end
 	end

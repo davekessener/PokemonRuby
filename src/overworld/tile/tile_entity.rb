@@ -4,19 +4,19 @@ module Overworld
 		class Base
 			def initialize
 				@layers = {}
-				@animations = []
+				@animations = ObjectPool.new
 			end
 
 			def interact
 			end
 
-			def enter(dir)
+			def trigger
 			end
 
-			def exit(dir)
+			def enter(entity)
 			end
 
-			def trigger(entity)
+			def exit(entity)
 			end
 
 			def can_enter(entity, tile)
@@ -37,15 +37,14 @@ module Overworld
 			end
 
 			def update(delta)
-				@animations.each { |a| a.update(delta) }
-				@animations.reject! &:done?
+				@animations.update delta
 			end
 
 			def draw(x, y)
 				@layers.each do |z, layer|
 					layer.each { |t| t.draw(x, y, z) }
 				end
-				@animations.each { |a| a.draw(x, y) }
+				@animations.draw
 			end
 		end
 
@@ -91,13 +90,14 @@ module Overworld
 				entity.is_a? Player and entity.model.facing == @direction
 			end
 
-			def trigger(entity)
+			def trigger
+				player = $world.player
 				d = Utils::direction(@direction)
-				px, py = entity.px + d.dx, entity.py + d.dy
-				entity.px -= d.dx
-				entity.py -= d.dy
-				entity.model.facing = @direction
-				entity.controller.override(Entity::JumpAction.new(entity, px, py))
+				px, py = player.px + d.dx, player.py + d.dy
+				player.px -= d.dx
+				player.py -= d.dy
+				player.model.facing = @direction
+				player.controller.override(Entity::JumpAction.new(player, px, py))
 			end
 		end
 
@@ -112,6 +112,14 @@ module Overworld
 
 			def encounter_type
 				:tall_grass
+			end
+
+			def enter(entity)
+				if Utils::gen == 3
+					l = $world.tile_size
+					anim = Animation::Static.new('tall_grass', entity.px * l, entity.py * l, entity.model.z + 1)
+					@animations << AnimationEntity.new(anim)
+				end
 			end
 		end
 

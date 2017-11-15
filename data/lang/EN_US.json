@@ -1,2 +1,15 @@
 {
+	"pallet_town" : {
+		"sign" : {
+			"oaks_lab" : "OAK POK@MON RESEARCH LAB",
+			"main" : "PALLET TOWN\nShades of your journey await!",
+			"tips" : "TRAINER TIPS\n\nPress START to open the MENU!",
+			"player" : "#{player}'s house",
+			"rival" : "#{rival}'s house"
+		},
+		"npc" : {
+			"girl" : "\\c2Signs are useful, aren't they?",
+			"man" : "\\c1Technology is incredible!\n\nYou can now store and recall items and\nPOK@MON as data via PC."
+		}
+	}
 }

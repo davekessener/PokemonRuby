@@ -19,11 +19,16 @@ module Pokemon
 		SPRITE_DIR = 'sprite'
 		MAP_DIR = 'map'
 		BORDER_DIR = 'border'
+		ANIMATION_DIR = 'animation'
 		CHARSET_DIR = 'charset'
 		LANG_DIR = 'lang'
 		SAVE_DIR = 'saves'
 
 		Directions = [:left, :right, :up, :down]
+
+		def self.gen
+			3
+		end
 
 		def self.scale_screen(&block)
 			if block_given?
@@ -108,8 +113,8 @@ module Pokemon
 		end
 
 		def self.get_z(id)
-			@@zs ||= {background: 0, bottom: 1, entity: 10, top: 100}
-			@@zs.fetch(id, 101)
+			@@zs ||= {background: 0, bottom: 1, entity: 10, top: 100, ui: 1000}
+			@@zs.fetch(id, 1001)
 		end
 
 		def self.get_priority(id)

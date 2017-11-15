@@ -1,0 +1,19 @@
+{
+  "tileset": "indoors",
+  "width": 1,
+  "height": 1,
+  "map": {
+    "bottom": [
+      [
+        [
+          null
+        ]
+      ]
+    ]
+  },
+  "meta": [
+    [
+      "wall"
+    ]
+  ]
+}

@@ -31,10 +31,6 @@ module Pokemon
 				not @queue.empty?
 			end
 
-			def <<(action)
-				add(action, @priority)
-			end
-
 			def add(action, priority_id)
 				priority = Utils::get_priority(priority_id)
 				if priority > @priority
@@ -42,7 +38,7 @@ module Pokemon
 					@queue = []
 				end
 
-				@queue << action
+				@queue << action unless priority < @priority
 			end
 
 			def update(delta)

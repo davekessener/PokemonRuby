@@ -1,0 +1,66 @@
+{
+  "name": "Pallet Town",
+  "map": "pallet_town:pallet_town",
+  "border": "forest",
+  "entities" : [
+		{
+			"id" : "warp_player_house",
+			"type" : "warp",
+			"argument" : {
+				"map" : "pallet_town:player_house_1f",
+				"target" : "front_door"
+			},
+			"at" : [ 6, 8 ]
+		},
+		{
+			"id" : "sign_oak",
+			"type" : "text",
+			"argument" : "pallet_town:sign:oaks_lab",
+			"at" : [ 16, 18 ]
+		},
+		{
+			"id" : "sign_pallettown",
+			"type" : "text",
+			"argument" : "pallet_town:sign:main",
+			"at" : [ 9, 12 ]
+		},
+		{
+			"id" : "mailbox_player",
+			"type" : "text",
+			"argument" : "pallet_town:sign:player",
+			"at" : [ 4, 8 ]
+		},
+		{
+			"id" : "mailbox_rival",
+			"type" : "text",
+			"argument" : "pallet_town:sign:rival",
+			"at" : [ 13, 8 ]
+		},
+		{
+			"id" : "trainer_tips",
+			"type" : "text",
+			"argument" : "pallet_town:sign:tips",
+			"at" : [ 5, 15 ]
+		},
+		{
+			"id" : "girl_1",
+			"type" : "npc",
+			"argument" : {
+				"sprite" : "girl_1",
+				"text" : "pallet_town:npc:girl",
+				"ai" : "random:5,750,0.05"
+			},
+			"at" : [ 5, 16 ]
+		},
+		{
+			"id" : "man",
+			"type" : "npc",
+			"argument" : {
+				"sprite" : "fat_man",
+				"text" : "pallet_town:npc:man",
+				"ai" : "random:7,500,0.2"
+			},
+			"at" : [ 14, 19 ]
+		}
+  ]
+}

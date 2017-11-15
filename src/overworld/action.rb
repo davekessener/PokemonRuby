@@ -34,7 +34,7 @@ module Overworld
 			end
 
 			def exit
-				entity.model.reset :dx, :dx, :dz, :progress
+				entity.model.reset :dx, :dy, :dz, :progress
 				entity.model.type = :standing
 			end
 

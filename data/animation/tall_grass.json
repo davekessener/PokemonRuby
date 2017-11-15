@@ -1,0 +1,24 @@
+{
+	"source" : "tall_grass.png",
+	"width" : 16,
+	"height" : 16,
+	"frames" : [
+		{
+			"at" : [0, 0],
+			"duration" : 200
+		},
+		{
+			"at" : [1, 0],
+			"duration" : 100
+		},
+		{
+			"at" : [0, 1],
+			"duration" : 100
+		},
+		{
+			"at" : [1, 1],
+			"duration" : 200
+		}
+	]
+}
+

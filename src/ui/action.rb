@@ -3,8 +3,19 @@ module Pokemon
 		class DisplayTextAction < Action::Base
 			def initialize(entity, text, speed = 30)
 				super(entity)
-				@text = text.split(//)
+				@text = []
 				@left = @speed = speed
+				while text and not text.empty?
+					if text.start_with? '\c'
+						@text << (lambda do |c|
+							lambda { |r| r.color = c }
+						end).call(text[2].ord - '0'.ord)
+						text = text[3..-1]
+					else
+						@text << text[0]
+						text = text[1..-1]
+					end
+				end
 			end
 
 			def enter
@@ -15,7 +26,12 @@ module Pokemon
 				while delta > @left
 					delta -= @left
 					@left = @speed
-					entity.renderer << @text.shift
+					o = @text.shift
+					if o.respond_to? :call
+						o.call entity.renderer
+					else
+						entity.renderer << o
+					end
 					break if done?
 				end
 				@left -= delta

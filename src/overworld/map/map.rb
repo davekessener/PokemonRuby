@@ -18,6 +18,10 @@ module Overworld
 				end
 			end
 
+			def tilemap
+				@map
+			end
+
 			def draw(viewport)
 				l = tile_size
 				px0, py0 = *viewport.lower_bound(l)
@@ -42,12 +46,27 @@ module Overworld
 				end.to_h
 			end
 
+			def entity_spawn(id)
+				@entities[id][1]
+			end
+
 			def renderer_at(px, py)
 				map, x, y = *from_coords(px, py)
+
 				if map.is_a? self.class
 					map.tiles[x][y].renderer
 				else
 					nil
+				end
+			end
+
+			def meta_at(px, py)
+				map, x, y = *from_coords(px, py)
+
+				if map.is_a? self.class
+					map.tilemap.meta_at x, y
+				else
+					@map.meta_at x, y
 				end
 			end
 
@@ -56,14 +75,24 @@ module Overworld
 				map.tiles[x][y].interact if map.is_a? self.class
 			end
 
+			def player_trigger(px, py)
+				@tiles[px][py].trigger
+			end
+
 			def player_enter(player)
-				t = @tiles[player.px][player.py]
-				t.enter(player.model.facing)
-				t.trigger(player)
+				entity_enter(player)
 			end
 
 			def player_leave(player)
-				@tiles[player.px][player.py].exit(player.model.facing)
+				entity_leave(player)
+			end
+
+			def entity_enter(e)
+				@tiles[e.px][e.py].enter(e)
+			end
+
+			def entity_leave(e)
+				@tiles[e.px][e.py].exit(e)
 			end
 
 			def can_move_to(entity, px, py)

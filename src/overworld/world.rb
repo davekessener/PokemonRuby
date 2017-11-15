@@ -4,15 +4,18 @@ module Overworld
 		attr_reader :player, :player_input
 
 		def initialize
+			Render.set_render_gen(Utils::gen)
+			@pool = ObjectPool.new
 			@player_input = $input.create(:player)
 			@script_input = $input.create(:script)
 		end
 
-		def load(data)
-			@player = Player.new(@player_input, data)
-			@map = Map[data['map']]
+		def load(save)
+			@player = Player.new(@player_input, save.data)
+			@map = Map[save.data['map']]
 			@camera = Camera.new(@player.model)
 			load_entities
+			@pool.add(@entities[:player])
 			@map.enter
 		end
 
@@ -42,12 +45,29 @@ module Overworld
 			end
 		end
 
+		def add_object(o)
+			@pool.add o
+		end
+
+		def meta_at(px, py)
+			@map.meta_at px, py
+		end
+
 		def player_interact(px, py)
-			_, e = *@entities.find { |id, o| o.px == px and o.py == py }
+			e = entity_at px, py
 			if e
 				e.interact
 			else
 				@map.player_interact(px, py)
+			end
+		end
+
+		def player_trigger(px, py)
+			e = entity_at px, py
+			if e
+				e.trigger
+			else
+				@map.player_trigger(px, py)
 			end
 		end
 
@@ -68,11 +88,26 @@ module Overworld
 			@map.can_move_to(player, px, py)
 		end
 
+		def try_player_move(p, px, py)
+			e = @pool.find { |o| o.px == px and o.py == py }
+
+			return true if e and e.collide
+
+			if can_player_move? p, px, py
+				move_player px, py
+				return true
+			end
+
+			return false
+		end
+
 		def move_entity(e, px, py)
 			if e == @player
 				move_player(px, py)
 			else
+				@map.entity_leave(e)
 				e.px, e.py = px, py
+				@map.entity_enter(e)
 			end
 		end
 
@@ -86,7 +121,19 @@ module Overworld
 			@map.player_enter(@player)
 		end
 
+		def warp_player(map, px, py)
+			@map.player_leave(@player)
+			@player.px, @player.py = px, py
+			switch_map(map)
+			@map.player_enter(@player)
+		end
+
 		private
+
+		def entity_at(px, py)
+			_, e = *@entities.find { |id, o| o.px == px and o.py == py }
+			e
+		end
 
 		def switch_map(map)
 			@map.exit if @map
@@ -96,10 +143,10 @@ module Overworld
 		end
 
 		def load_entities
-			@pool = ObjectPool.new
+			@entities.each { |id, e| e.remove! unless id == :player } if @entities
 			@entities = @map.entities
-			@entities[:player] = @player
 			@entities.each { |id, e| @pool.add(e) }
+			@entities[:player] = @player
 		end
 
 		def update_script

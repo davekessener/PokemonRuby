@@ -14,7 +14,7 @@ module Pokemon
 				
 				if @active and @active.done?
 					@active = nil
-					@input.active = false
+					@input.deactivate
 				end
 			end
 
@@ -31,13 +31,9 @@ module Pokemon
 				@windows = []
 			end
 
-			def text_window(s)
-				set_active(TextWindow.new(s, 1000, charset, border))
+			def text_window(s, border = :default)
+				set_active(TextWindow.new(s, Utils::get_z(:ui) + @windows.length, charset, Border[border]))
 				@active
-			end
-
-			def border
-				Border[:default]
 			end
 
 			def charset

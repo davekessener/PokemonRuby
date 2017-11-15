@@ -67,12 +67,12 @@ module Overworld
 		end
 
 		class OpenTextboxAction < Action
-			def initialize(content)
-				@content = content
+			def initialize(content, border = :default)
+				@content, @border = content, border
 			end
 
 			def act
-				$ui.text_window(@content)
+				$ui.text_window(@content, @border)
 			end
 		end
 
@@ -96,13 +96,25 @@ module Overworld
 			end
 		end
 
-		class TextboxScript < Script::List
-			def initialize(content)
+		class Textbox < List
+			def initialize(content, border = :default)
 				super([
-					Script::OpenTextboxAction.new(content),
-					Script::WaitForUI.new,
-					Script::CloseWindowsAction.new
+					OpenTextboxAction.new(content, border),
+					WaitForUI.new,
+					CloseWindowsAction.new
 				])
+			end
+		end
+
+		class Warp < Action
+			def initialize(map, px, py)
+				@map, @px, @py = map, px, py
+			end
+
+			def act
+				$world.warp_player(@map, @px, @py)
+				player = $world.player
+				player.controller.add(Entity::WalkAction.new(player, player.model.facing), :script)
 			end
 		end
 	end

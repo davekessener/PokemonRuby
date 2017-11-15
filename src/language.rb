@@ -26,7 +26,8 @@ module Pokemon
 				end
 
 				if t
-					Evaluator.new.instance_eval "\"#{t}\""
+					Utils::Logger::log("String primitive '#{ids.join(':')}' is '#{t}'.")
+					(Evaluator.new.instance_eval "\"#{t.gsub(/\\/, '^')}\"").gsub(/\^/, '\\')
 				else
 					'undefined'
 				end

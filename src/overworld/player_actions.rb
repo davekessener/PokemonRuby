@@ -47,7 +47,9 @@ module Overworld
 			if @left <= 0
 				@left += l
 				entity.model.animation += 1
-			
+				
+				$world.player_trigger(entity.px, entity.py)
+
 				@done = true
 				unless entity.controller.queued?
 					dir = entity.direction
@@ -64,11 +66,10 @@ module Overworld
 					entity.model.dy -= dy
 				
 					if entity.input.down? entity.model.facing
-						if $world.can_player_move?(entity, px, py)
-							$world.move_player(px, py)
+						if $world.try_player_move(entity, px, py)
 							update_speed(entity.input.down?(:B) ? :running : :walking)
 							@done = false
-						else
+						elsif not entity.controller.queued?
 							entity.controller.override(FailedMoveAction.new(entity, entity.model.facing, 600))
 						end
 					end

@@ -9,6 +9,10 @@ module Overworld
 			@tileset.tile_size
 		end
 
+		def meta_at(px, py)
+			@meta[py][px].to_sym
+		end
+
 		def create
 			Array.new(@width) do |x|
 				Array.new(@height) do |y|
