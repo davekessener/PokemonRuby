@@ -1,0 +1,18 @@
+{
+  "name": "Route 29",
+  "map": "route_29",
+  "border": "forest_johto",
+  "neighbors": {
+    "right": {
+      "id": "overworld:new_bark_town",
+      "offset": 0
+    },
+    "left": {
+      "id": "overworld:cherrygrove_city",
+      "offset": -2
+    }
+  },
+  "entities": [
+    
+  ]
+}

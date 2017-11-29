@@ -1,0 +1,14 @@
+{
+  "name": "Cherrygrove City",
+  "map": "cherrygrove_city:cherrygrove_city",
+  "border": "forest_johto",
+  "neighbors": {
+    "right": {
+      "id": "overworld:route_29",
+      "offset": 2
+    }
+  },
+  "entities": [
+    
+  ]
+}

@@ -3,6 +3,6 @@
 	"width" : 16,
 	"height" : 24,
 	"offset" : 0,
-	"parent" : "leaf"
+	"parent" : "npc"
 }
 

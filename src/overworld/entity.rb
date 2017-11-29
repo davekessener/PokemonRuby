@@ -87,6 +87,10 @@ module Overworld
 				@progress = 0.0
 			end
 
+			def moving?
+				@dx != 0 or @dy != 0 or @dz != 0
+			end
+
 			def facing=(id)
 				raise ArgumentError, "The only valid directions are #{Utils::Directions.join(', ')}!" unless Utils::Directions.include? id
 				@facing = id

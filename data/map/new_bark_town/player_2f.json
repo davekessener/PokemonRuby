@@ -1,0 +1,29 @@
+{
+  "name": "New Bark Town",
+  "map": "new_bark_town:player_2f",
+  "border": "indoors",
+  "entities": [
+    {
+      "id": "warp:downstairs",
+      "at": [
+        8,
+        2
+      ],
+      "type": "warp",
+      "argument": {
+        "map": "new_bark_town:player_1f",
+        "target": "warp:upstairs",
+		"direction": "left"
+      }
+    },
+    {
+      "id": "text:sign",
+      "at": [
+        10,
+        1
+      ],
+      "type": "text",
+      "argument": "new_bark_town:sign:tips"
+    }
+  ]
+}

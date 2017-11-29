@@ -1,8 +1,8 @@
 {
 	"name" : "Daiki",
 	"rival" : "Taiga",
-	"sprite" : "leaf",
-	"map" : "overworld:pallet_town",
+	"sprite" : "gold",
+	"map" : "overworld:new_bark_town",
 	"x" : 12,
 	"y" : 9,
 	"facing" : "left"

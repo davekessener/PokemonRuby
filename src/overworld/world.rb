@@ -4,7 +4,6 @@ module Overworld
 		attr_reader :player, :player_input
 
 		def initialize
-			Render.set_render_gen(Utils::gen)
 			@pool = ObjectPool.new
 			@player_input = $input.create(:player)
 			@script_input = $input.create(:script)

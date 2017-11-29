@@ -16,7 +16,7 @@ module Overworld
 		def create
 			Array.new(@width) do |x|
 				Array.new(@height) do |y|
-					e = TileEntity[@meta[y][x].to_sym]
+					e = TileEntity.new(x, y, Meta[@meta[y][x].to_sym], @animators[y][x])
 
 					Utils::layers.each do |z_id|
 						z = Utils::get_z(z_id)
@@ -50,6 +50,8 @@ module Overworld
 			@maps = {}
 			@meta = []
 
+			@animators = Array.new(@height) { |col| Array.new(@width) { |row| [] } }
+
 			map = data['map']
 			Utils::layers.each do |z_id|
 				@maps[z_id] = []
@@ -57,7 +59,14 @@ module Overworld
 				@maps[z_id] = map[z_id.to_s].map do |layer|
 					Array.new(@width) do |x|
 						Array.new(@height) do |y|
-							layer[y][x] ? @tileset[layer[y][x]] : nil
+							if (l = layer[y][x])
+								@tileset[l].tap do |e|
+									@animators[y][x] = @tileset.animations(l).map do |a|
+										id, args = *a.split(/:/)
+										Animator[id.to_sym].new(args ? args.split(/,/) : [])
+									end if @tileset.animation? l
+								end
+							end
 						end
 					end
 				end if map[z_id.to_s]

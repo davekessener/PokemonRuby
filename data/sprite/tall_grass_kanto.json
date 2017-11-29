@@ -6,13 +6,13 @@
 	"sprite" : {
 		"group" : [
 			{
-				"id" : "standing",
+				"id" : "default",
 				"default" : true,
-				"at" : [0, 0]
+				"at" : [5, 0]
 			},
 			{
-				"id" : "entering",
-				"at" : [0, 1]
+				"id" : "standing",
+				"at" : [1, 0]
 			}
 		]
 	}

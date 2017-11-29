@@ -45,11 +45,12 @@ module Overworld
 				def initialize(args)
 					@map = Map[args['map']]
 					@target = args['target']
+					@dir = args['direction'].to_sym
 				end
 
 				def instantiate(id, x, y)
 					@script ||= Script::Warp.new(@map, *@map.entity_spawn(@target))
-					WarpEntity.new(id, x, y, @script)
+					WarpEntity.new(id, x, y, @script, @dir)
 				end
 			end
 		end

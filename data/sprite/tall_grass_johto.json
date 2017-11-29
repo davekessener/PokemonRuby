@@ -1,0 +1,20 @@
+{
+	"source" : "animation.png",
+	"width" : 16,
+	"height" : 16,
+	"offset" : 0,
+	"sprite" : {
+		"group" : [
+			{
+				"id" : "default",
+				"default" : true,
+				"at" : [0, 1]
+			},
+			{
+				"id" : "standing",
+				"at" : [4, 1]
+			}
+		]
+	}
+}
+

@@ -5,13 +5,7 @@ module Pokemon
 
 			def initialize(s, z, charset, border)
 				sw, sh = Utils::SCREEN_SIZE[0], Utils::SCREEN_SIZE[1]
-				h = 0
-
-				if Utils::gen == 2
-					h = 6 * charset.char_height
-				else
-					h = 3 * charset.char_height
-				end
+				h = 3 * charset.char_height
 					
 				super(0, sh - h, sw, h, z, border)
 
@@ -33,17 +27,14 @@ module Pokemon
 					@controller.add(InputAction.new(self, [:A, :B]) { renderer.reset }, :ui) unless j == paragraphs.size - 1
 				end
 
-				if Utils::gen == 2
-					@renderer = TextRenderer.new(self,
-						self.x + 3 * charset.char_height / 2,
-						self.y + 3 * charset.char_height / 2,
-						2 * charset.char_height)
-				elsif Utils::gen == 3
-					@renderer = TextRenderer.new(self, 
-						self.x + border.offset[:x],
-						self.y + border.offset[:y],
-						charset.char_height)
-				end
+#				@renderer = TextRenderer.new(self,
+#					self.x + 3 * charset.char_height / 2,
+#					self.y + 3 * charset.char_height / 2,
+#					2 * charset.char_height)
+				@renderer = TextRenderer.new(self, 
+					self.x + border.offset[:x],
+					self.y + border.offset[:y],
+					charset.char_height)
 			end
 
 			def done?

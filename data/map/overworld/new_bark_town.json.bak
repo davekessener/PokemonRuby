@@ -1,0 +1,53 @@
+{
+  "name": "New Bark Town",
+  "map": "new_bark_town:new_bark_town",
+  "border": "forest_johto",
+  "neighbors": {
+    "left": {
+      "id": "overworld:route_29",
+      "offset": 0
+    }
+  },
+  "entities": [
+    {
+      "id": "town_sign",
+      "at": [
+        10,
+        9
+      ],
+      "type": "text",
+      "argument": "new_bark_town:sign:town"
+    },
+    {
+      "id": "player_sign",
+      "at": [
+        14,
+        7
+      ],
+      "type": "text",
+      "argument": "new_bark_town:sign:player"
+    },
+    {
+      "id": "lab_sign",
+      "at": [
+        5,
+        4
+      ],
+      "type": "text",
+      "argument": "new_bark_town:sign:lab"
+    },
+    {
+      "id": "warp:player_house",
+      "at": [
+        16,
+        7
+      ],
+      "type": "warp",
+      "argument": {
+        "map": "new_bark_town:player_1f",
+        "target": "warp:outside",
+		"direction": "up"
+      }
+    }
+  ]
+}

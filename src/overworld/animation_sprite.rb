@@ -1,9 +1,11 @@
 module Pokemon
 	module Overworld
-		class AnimationEntity < Entity::IEntity
+		class AnimationSprite < Entity::IEntity
 			def initialize(a)
 				super()
 				@animation = a
+
+				@animation.reset
 			end
 
 			def update(delta)
@@ -17,11 +19,11 @@ module Pokemon
 			end
 
 			def px
-				@animation.px
+				@animation.model.x / $world.tile_size
 			end
 
 			def py
-				@animation.py
+				@animation.model.y / $world.tile_size
 			end
 
 			def corporal
@@ -30,6 +32,10 @@ module Pokemon
 
 			def model
 				@animation.model
+			end
+
+			def remove?
+				super or @animation.remove?
 			end
 		end
 	end

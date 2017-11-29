@@ -9,6 +9,14 @@ module Overworld
 			@tiles[id]
 		end
 
+		def animation?(name)
+			not @animators[name].empty?
+		end
+
+		def animations(name)
+			@animators[name]
+		end
+
 		private_class_method :new
 
 		private
@@ -18,6 +26,7 @@ module Overworld
 			fn = Utils::absolute_path(Utils::MEDIA_DIR, Utils::TILESET_DIR, data['source'])
 			@source, @cols, _ = *Utils::load_tiles(fn, @tile_size)
 			@tiles = {}
+			@animators = {}
 
 			data['tiles'].each { |tile| load_tile [], tile }
 
@@ -30,6 +39,8 @@ module Overworld
 		def load_tile(id, tile)
 			id << tile['id']
 			name = id.join ':'
+
+			@animators[name] = tile['animation'] ? tile['animation'].split(/,/) : []
 
 			if tile['group']
 				tile['group'].each { |t| load_tile id.dup, t }

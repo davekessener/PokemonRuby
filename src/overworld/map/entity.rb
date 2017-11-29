@@ -34,7 +34,16 @@ module Overworld
 		end
 
 		class WarpEntity < EventEntity
-			set_trigger :collide
+			def initialize(id, x, y, script, dir)
+				super(id, x, y, script)
+				@dir = dir
+			end
+
+			def collide
+				if @dir == :any or @dir == $world.player.model.facing
+					activate(@script)
+				end
+			end
 		end
 
 		class NPCEntity < Entity::Base

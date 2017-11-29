@@ -1,0 +1,14 @@
+{
+  "name": "Route 1",
+  "map": "route_01",
+  "border": "forest_kanto",
+  "neighbors": {
+    "down": {
+      "id": "overworld:pallet_town",
+      "offset": 0
+    }
+  },
+  "entities": [
+    
+  ]
+}

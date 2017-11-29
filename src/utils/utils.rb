@@ -26,10 +26,6 @@ module Pokemon
 
 		Directions = [:left, :right, :up, :down]
 
-		def self.gen
-			3
-		end
-
 		def self.scale_screen(&block)
 			if block_given?
 				Gosu::scale(Utils::SCREEN_SCALE, Utils::SCREEN_SCALE, &block)
@@ -72,7 +68,7 @@ module Pokemon
 			@@speeds ||= {
 				walking: 56,
 				jumping: 64,
-				running: 96
+				running: 114
 			}
 
 			@@speeds.fetch(id, 16) * SCREEN_SCALE

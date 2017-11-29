@@ -81,6 +81,7 @@ module Overworld
 
 			def player_enter(player)
 				entity_enter(player)
+				player_trigger(player.px, player.py)
 			end
 
 			def player_leave(player)

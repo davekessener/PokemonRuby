@@ -11,5 +11,12 @@
 			"girl" : "\\c2Signs are useful, aren't they?",
 			"man" : "\\c1Technology is incredible!\n\nYou can now store and recall items and\nPOK@MON as data via PC."
 		}
+	},
+	"new_bark_town" : {
+		"sign" : {
+			"town" : "NEW BARK TOWN\n\nThe town where the winds of a\nnew beginning blow.",
+			"player" : "#{player}'s house",
+			"lab" : "ELM POK@MON LAB"
+		}
 	}
 }

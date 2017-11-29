@@ -13,6 +13,10 @@ module Pokemon
 				Renderer.new(self)
 			end
 
+			def reset
+				@frame = 0
+			end
+
 			def remove?
 				super or @frame >= @animation.frames
 			end
@@ -32,7 +36,8 @@ module Pokemon
 		end
 
 		class AnimationModel
-			attr_reader :x, :y, :z, :width, :height
+			attr_accessor :x, :y, :z
+			attr_reader :width, :height
 
 			def initialize(x, y, z, w, h)
 				@x, @y, @z = x, y, z

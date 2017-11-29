@@ -1,0 +1,33 @@
+{
+  "name": "New Bark Town",
+  "map": "new_bark_town:player_1f",
+  "border": "indoors",
+  "entities": [
+    {
+      "id": "warp:outside",
+      "at": [
+        6,
+        9
+      ],
+      "type": "warp",
+      "argument": {
+        "map": "overworld:new_bark_town",
+        "target": "warp:player_house",
+		"direction": "down"
+      }
+    },
+    {
+      "id": "warp:upstairs",
+      "at": [
+        10,
+        2
+      ],
+      "type": "warp",
+      "argument": {
+        "map": "new_bark_town:player_2f",
+        "target": "warp:downstairs",
+		"direction": "right"
+      }
+    }
+  ]
+}
