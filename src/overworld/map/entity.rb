@@ -34,8 +34,11 @@ module Overworld
 		end
 
 		class WarpEntity < EventEntity
-			def initialize(id, x, y, script, dir)
+			attr_reader :on_appear
+
+			def initialize(id, x, y, script, appear, dir)
 				super(id, x, y, script)
+				@on_appear = appear
 				@dir = dir
 			end
 

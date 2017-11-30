@@ -25,6 +25,10 @@ module Overworld
 				@active = 0
 			end
 
+			def <<(line)
+				@lines << line
+			end
+
 			def tick
 				while not done?
 					@lines[@active].tick
@@ -52,8 +56,12 @@ module Overworld
 		end
 
 		class Action < Base
+			def initialize(&block)
+				@action = block_given? ? block : lambda { act }
+			end
+
 			def tick
-				act unless done?
+				@action.call unless done?
 				@done = true
 			end
 
@@ -106,15 +114,10 @@ module Overworld
 			end
 		end
 
-		class Warp < Action
-			def initialize(map, px, py)
-				@map, @px, @py = map, px, py
-			end
-
-			def act
-				$world.warp_player(@map, @px, @py)
-				player = $world.player
-				player.controller.add(Entity::WalkAction.new(player, player.model.facing), :script)
+		class Warp < List
+			def initialize(map, id)
+				super([Action.new { self << $world.warp_player(@map, @wid) }])
+				@map, @wid = map, id
 			end
 		end
 	end

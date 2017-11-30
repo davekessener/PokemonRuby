@@ -4,8 +4,6 @@ module Pokemon
 			def initialize(a)
 				super()
 				@animation = a
-
-				@animation.reset
 			end
 
 			def update(delta)

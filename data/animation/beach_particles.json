@@ -1,0 +1,16 @@
+{
+	"source" : "../sprite/animation.png",
+	"width" : 16,
+	"height" : 16,
+	"frames" : [
+		{
+			"at" : [6, 0],
+			"duration" : 100
+		},
+		{
+			"at" : [7, 0],
+			"duration" : 150
+		}
+	]
+}
+

@@ -43,14 +43,24 @@ module Overworld
 
 			class Warp
 				def initialize(args)
-					@map = Map[args['map']]
+					@map = args['map']
 					@target = args['target']
 					@dir = args['direction'].to_sym
 				end
 
 				def instantiate(id, x, y)
-					@script ||= Script::Warp.new(@map, *@map.entity_spawn(@target))
-					WarpEntity.new(id, x, y, @script, @dir)
+					load_scripts
+					WarpEntity.new(id, x, y, @warp_script, @appear_script, @dir)
+				end
+
+				private
+
+				def load_scripts
+					@warp_script ||= Script::Warp.new(Map[@map], @target)
+					@appear_script ||= Script::Action.new() do
+						p = $world.player
+						p.controller.add(Entity::WalkAction.new(p, p.model.facing), :script)
+					end
 				end
 			end
 		end

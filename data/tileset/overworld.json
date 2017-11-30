@@ -46,11 +46,11 @@
     },
     {
       "id": "0006",
+      "animation": "tall_grass:kanto",
       "at": [
         7,
         0
-      ],
-      "animation": "tall_grass:kanto"
+      ]
     },
     {
       "id": "0007",
@@ -103,11 +103,11 @@
     },
     {
       "id": "000E",
+      "animation": "tall_grass:johto",
       "at": [
         14,
         0
-      ],
-      "animation": "tall_grass:johto"
+      ]
     },
     {
       "id": "000F",
@@ -743,6 +743,7 @@
     },
     {
       "id": "0057",
+      "animation": "foorsteps",
       "at": [
         0,
         1
@@ -750,6 +751,7 @@
     },
     {
       "id": "0058",
+      "animation": "foorsteps",
       "at": [
         1,
         1
@@ -757,6 +759,7 @@
     },
     {
       "id": "0059",
+      "animation": "foorsteps",
       "at": [
         2,
         1
@@ -764,6 +767,7 @@
     },
     {
       "id": "005A",
+      "animation": "foorsteps",
       "at": [
         3,
         1
@@ -771,6 +775,7 @@
     },
     {
       "id": "005B",
+      "animation": "foorsteps",
       "at": [
         4,
         1
@@ -799,6 +804,7 @@
     },
     {
       "id": "005F",
+      "animation": "foorsteps",
       "at": [
         0,
         2
@@ -806,6 +812,7 @@
     },
     {
       "id": "0060",
+      "animation": "foorsteps",
       "at": [
         1,
         2
@@ -813,6 +820,7 @@
     },
     {
       "id": "0061",
+      "animation": "foorsteps",
       "at": [
         2,
         2
@@ -820,6 +828,7 @@
     },
     {
       "id": "0062",
+      "animation": "foorsteps",
       "at": [
         3,
         2
@@ -827,6 +836,7 @@
     },
     {
       "id": "0063",
+      "animation": "foorsteps",
       "at": [
         4,
         2
@@ -855,6 +865,7 @@
     },
     {
       "id": "0067",
+      "animation": "foorsteps",
       "at": [
         0,
         3
@@ -862,6 +873,7 @@
     },
     {
       "id": "0068",
+      "animation": "foorsteps",
       "at": [
         1,
         3
@@ -869,6 +881,7 @@
     },
     {
       "id": "0069",
+      "animation": "foorsteps",
       "at": [
         2,
         3
@@ -2759,6 +2772,7 @@
     },
     {
       "id": "0177",
+      "animation": "footsteps",
       "at": [
         19,
         16
@@ -2766,6 +2780,7 @@
     },
     {
       "id": "0178",
+      "animation": "footsteps",
       "at": [
         20,
         16
@@ -2773,6 +2788,7 @@
     },
     {
       "id": "0179",
+      "animation": "footsteps",
       "at": [
         21,
         16
@@ -2780,6 +2796,7 @@
     },
     {
       "id": "017A",
+      "animation": "footsteps",
       "at": [
         12,
         17
@@ -2787,6 +2804,7 @@
     },
     {
       "id": "017B",
+      "animation": "footsteps",
       "at": [
         13,
         17
@@ -2815,6 +2833,7 @@
     },
     {
       "id": "017F",
+      "animation": "footsteps",
       "at": [
         19,
         17
@@ -2822,6 +2841,7 @@
     },
     {
       "id": "0180",
+      "animation": "footsteps",
       "at": [
         20,
         17
@@ -2829,6 +2849,7 @@
     },
     {
       "id": "0181",
+      "animation": "footsteps",
       "at": [
         21,
         17
@@ -2836,6 +2857,7 @@
     },
     {
       "id": "0182",
+      "animation": "footsteps",
       "at": [
         12,
         18
@@ -2843,6 +2865,7 @@
     },
     {
       "id": "0183",
+      "animation": "footsteps",
       "at": [
         13,
         18
@@ -2871,6 +2894,7 @@
     },
     {
       "id": "0187",
+      "animation": "footsteps",
       "at": [
         19,
         18
@@ -2878,6 +2902,7 @@
     },
     {
       "id": "0188",
+      "animation": "footsteps",
       "at": [
         20,
         18
@@ -2885,6 +2910,7 @@
     },
     {
       "id": "0189",
+      "animation": "footsteps",
       "at": [
         21,
         18
@@ -4851,6 +4877,7 @@
     },
     {
       "id": "0287",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -4905,6 +4932,7 @@
     },
     {
       "id": "0288",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -4959,6 +4987,7 @@
     },
     {
       "id": "0289",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5013,6 +5042,7 @@
     },
     {
       "id": "028A",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5067,6 +5097,7 @@
     },
     {
       "id": "028B",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5142,6 +5173,7 @@
     },
     {
       "id": "028F",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5196,6 +5228,7 @@
     },
     {
       "id": "0290",
+      "animation": "footsteps",
       "at": [
         1,
         2
@@ -5203,6 +5236,7 @@
     },
     {
       "id": "0291",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5257,6 +5291,7 @@
     },
     {
       "id": "0292",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5311,6 +5346,7 @@
     },
     {
       "id": "0293",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5386,6 +5422,7 @@
     },
     {
       "id": "0297",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5440,6 +5477,7 @@
     },
     {
       "id": "0298",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5494,6 +5532,7 @@
     },
     {
       "id": "0299",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5677,6 +5716,7 @@
     },
     {
       "id": "029F",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5731,6 +5771,7 @@
     },
     {
       "id": "02A0",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5785,6 +5826,7 @@
     },
     {
       "id": "02A1",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5839,6 +5881,7 @@
     },
     {
       "id": "02A2",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5893,6 +5936,7 @@
     },
     {
       "id": "02A3",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5968,6 +6012,7 @@
     },
     {
       "id": "02A7",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6022,6 +6067,7 @@
     },
     {
       "id": "02A8",
+      "animation": "footsteps",
       "at": [
         20,
         17
@@ -6029,6 +6075,7 @@
     },
     {
       "id": "02A9",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6083,6 +6130,7 @@
     },
     {
       "id": "02AA",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6137,6 +6185,7 @@
     },
     {
       "id": "02AB",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6212,6 +6261,7 @@
     },
     {
       "id": "02AF",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6266,6 +6316,7 @@
     },
     {
       "id": "02B0",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6320,6 +6371,7 @@
     },
     {
       "id": "02B1",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {

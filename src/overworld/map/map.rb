@@ -46,10 +46,6 @@ module Overworld
 				end.to_h
 			end
 
-			def entity_spawn(id)
-				@entities[id][1]
-			end
-
 			def renderer_at(px, py)
 				map, x, y = *from_coords(px, py)
 

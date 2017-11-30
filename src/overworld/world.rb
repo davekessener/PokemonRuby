@@ -16,6 +16,7 @@ module Overworld
 			load_entities
 			@pool.add(@entities[:player])
 			@map.enter
+			@map.player_enter @player
 		end
 
 		def save
@@ -120,11 +121,11 @@ module Overworld
 			@map.player_enter(@player)
 		end
 
-		def warp_player(map, px, py)
-			@map.player_leave(@player)
-			@player.px, @player.py = px, py
+		def warp_player(map, warp)
 			switch_map(map)
-			@map.player_enter(@player)
+			e = @entities[warp]
+			@player.px, @player.py = e.px, e.py
+			e.on_appear
 		end
 
 		private

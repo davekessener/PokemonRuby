@@ -9,12 +9,7 @@ module Pokemon
 				@animation = anim
 				@frame = 0
 				@model = AnimationModel.new(x, y, z, @animation.width, @animation.height)
-				Animator.new(self)
 				Renderer.new(self)
-			end
-
-			def reset
-				@frame = 0
 			end
 
 			def remove?
@@ -23,15 +18,17 @@ module Pokemon
 		end
 
 		class Static < BaseObject
-			def initialize(id, x, y, z)
+			def initialize(id, x, y, z, animator = SingleAnimator)
 				super(x, y, z, Resource[id])
+				animator.new(self)
 			end
 		end
 
 		class Centered < BaseObject
-			def initialize(id, x, y, z)
+			def initialize(id, x, y, z, animator = SingleAnimator)
 				a = Resource[id]
 				super(x - a.width / 2, y - a.height / 2, z, a)
+				animator.new(self)
 			end
 		end
 
@@ -45,17 +42,31 @@ module Pokemon
 			end
 		end
 
-		class Animator < Component
+		class SingleAnimator < Component
 			def initialize(object)
 				super(object)
 				@duration = object.animation.duration(0)
 			end
 
 			def update(delta)
-				@duration -= delta
-				if @duration <= 0
+				if (@duration -= delta) <= 0
 					object.frame += 1
 					@duration += object.animation.duration(object.frame) unless object.remove?
+				end
+			end
+		end
+
+		class LoopingAnimator < Component
+			def initialize(object)
+				super(object)
+				@duration = object.animation.duration(0)
+			end
+
+			def update(delta)
+				if (@duration -= delta) <= 0
+					object.frame += 1
+					object.frame = 0 if object.remove?
+					@duration += object.animation.duration(object.frame)
 				end
 			end
 		end
@@ -63,6 +74,18 @@ module Pokemon
 		class Renderer < Component
 			def draw
 				object.animation.draw(object.model.x, object.model.y, object.model.z, object.frame) unless object.remove?
+			end
+		end
+
+		class Follower < Component
+			def initialize(object, following)
+				super(object)
+
+				object.model.instance_eval do
+					define_singleton_method(:x) { following.x }
+					define_singleton_method(:y) { following.y }
+					define_singleton_method(:z) { following.z }
+				end
 			end
 		end
 
