@@ -1,0 +1,12 @@
+{
+	"player" : {
+		"name" : "Daiki",
+		"sprite" : "gold",
+		"map" : "overworld:new_bark_town",
+		"at" : [12, 9],
+		"facing" : "down"
+	},
+	"globals" : {
+		"rival" : "Taiga"
+	}
+}

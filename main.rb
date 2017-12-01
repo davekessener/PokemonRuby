@@ -1,4 +1,5 @@
 require 'gosu'
+require 'fileutils'
 
 
 class Main
@@ -36,6 +37,7 @@ class Main
 
 			begin
 				$window.show
+				$savefile.save if $savefile
 			rescue
 				Pokemon::Utils::Logger::print_all
 				raise

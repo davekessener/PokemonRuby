@@ -13,6 +13,10 @@ module Pokemon
 					super
 				end
 			end
+
+			def player
+				$world.player.data.name
+			end
 		end
 
 		class Language

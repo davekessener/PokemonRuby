@@ -130,6 +130,12 @@ module Pokemon
 			@@tilesets[fn]
 		end
 
+		def self.backup(fn)
+			i = Dir.glob(fn + "\.*\.bak").length
+			Logger::log("Creating backup ##{i + 1} for '#{relative_path(fn)}'!")
+			FileUtils.cp(fn, "#{fn}.#{i}.bak")
+		end
+
 		def self.button_id(id)
 			@@button_ids ||= {
 				Gosu::KB_A => :left,

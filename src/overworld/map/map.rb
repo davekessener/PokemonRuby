@@ -98,6 +98,7 @@ module Overworld
 			end
 
 			def enter
+				$savefile.save
 			end
 
 			def exit

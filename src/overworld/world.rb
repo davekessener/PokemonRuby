@@ -1,7 +1,7 @@
 module Pokemon
 module Overworld
 	class World
-		attr_reader :player, :player_input
+		attr_reader :player, :map, :player_input
 
 		def initialize
 			@pool = ObjectPool.new
@@ -10,8 +10,9 @@ module Overworld
 		end
 
 		def load(save)
-			@player = Player.new(@player_input, save.data)
-			@map = Map[save.data['map']]
+			data = save.player_data
+			@player = PlayerEntity.new(@player_input, data)
+			@map = Map[data.spawn_map]
 			@camera = Camera.new(@player.model)
 			load_entities
 			@pool.add(@entities[:player])
@@ -19,11 +20,9 @@ module Overworld
 			@map.player_enter @player
 		end
 
-		def save
-		end
-
 		def run_script(script)
 			@script = script
+			$savefile.enabled = false
 			@script_input.activate
 			@script_input << @script
 		end
@@ -154,6 +153,7 @@ module Overworld
 			if @script.done?
 				@script_input.delete @script
 				@script = nil
+				$savefile.enabled = true
 				@script_input.deactivate
 			end
 		end

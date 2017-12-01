@@ -4,10 +4,10 @@
     "sprite": "gold",
     "map": "overworld:new_bark_town",
     "at": [
-      17,
-      9
+      20,
+      7
     ],
-    "facing": "down"
+    "facing": "up"
   },
   "globals": {
     "rival": "Taiga"
