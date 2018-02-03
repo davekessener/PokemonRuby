@@ -1,0 +1,15 @@
+[
+	{
+		"id" : "tackle",
+		"power" : 40,
+		"accuracy" : 95,
+		"priority" : 0,
+		"category" : "physical",
+		"target" : "any_foe",
+		"types" : [ "normal" ],
+		"tags" : [
+			"contact"
+		]
+	}
+]
+

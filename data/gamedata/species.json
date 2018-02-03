@@ -1,0 +1,75 @@
+[
+	{
+		"id" : "malamar",
+		"dex" : {
+			"no" : 687,
+			"height" : 1.5,
+			"weight" : 47.0
+		},
+		"types" : [
+			"dark",
+			"psychic"
+		],
+		"abilities" : {
+			"primary" : "contrary",
+			"secondary" : "suction_cups",
+			"hidden" : "infiltrator"
+		},
+		"breeding" : {
+			"egg-groups" : [
+				"water_1",
+				"water_2"
+			],
+			"cycles" : 20
+		},
+		"training" : {
+			"evs" : {
+				"atk" : 2
+			},
+			"catch-rate" : 80,
+			"happiness" : 70,
+			"exp" : 169
+		},
+		"stats" : {
+			"hp"  : 96,
+			"atk" : 97,
+			"def" : 98,
+			"spa" : 63,
+			"spd" : 85,
+			"ini" : 83
+		},
+		"moves" : {
+			"level" : [
+				[ 1, "constrict"],
+				[ 1, "peck"],
+				[ 1, "reflect"],
+				[ 1, "reversal"],
+				[ 1, "tackle"],
+				[ 4, "reflect"],
+				[ 8, "foul_play"],
+				[12, "swagger"],
+				[13, "psywave"],
+				[15, "topsy_turvy"],
+				[18, "hypnosis"],
+				[21, "psybeam"],
+				[23, "switcheroo"],
+				[27, "payback"],
+				[31, "light_screen"],
+				[35, "pluck"],
+				[39, "psycho_cut"],
+				[43, "slash"],
+				[46, "night_slash"],
+				[48, "superpower"]
+			],
+			"egg" : [
+				"camouflage",
+				"destiny_bond",
+				"flatter",
+				"guard_swap",
+				"power_split",
+				"simple_beam"
+			]
+		}
+	}
+]
+

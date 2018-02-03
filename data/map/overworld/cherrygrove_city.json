@@ -3,6 +3,10 @@
   "map": "cherrygrove_city:cherrygrove_city",
   "border": "forest_johto",
   "neighbors": {
+    "up": {
+      "id": "overworld:route_30",
+      "offset": 12
+    },
     "right": {
       "id": "overworld:route_29",
       "offset": 2

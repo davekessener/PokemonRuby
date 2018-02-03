@@ -23,6 +23,10 @@ module Pokemon
 		CHARSET_DIR = 'charset'
 		LANG_DIR = 'lang'
 		SAVE_DIR = 'saves'
+		POKEMON_DIR = 'pkmn'
+		TYPES_DIR = 'type'
+		SPECIES_DIR = 'species'
+		GAMEDATA_DIR = 'gamedata'
 
 		Directions = [:left, :right, :up, :down]
 

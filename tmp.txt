@@ -1,0 +1,7 @@
+{:	nameI"pokemon_00:encoding"
+CP850:	item0:ability:whatever:affectionii:
+leveli7:
+stats{:hpii:ivs{
+:atki:defi:spai:spdi:inii:evs{
+;ii;ii;ii;ii;ii:nature:
+hardy:species:malamar

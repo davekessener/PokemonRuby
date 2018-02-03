@@ -60,7 +60,7 @@ module Overworld
 			end
 
 			def can_enter(entity, px, py, tile)
-				entity.is_a? Player and entity.model.facing == @direction
+				entity.is_a? PlayerEntity and entity.model.facing == @direction
 			end
 
 			def trigger(px, py)

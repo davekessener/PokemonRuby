@@ -4877,6 +4877,7 @@
     },
     {
       "id": "0287",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -4931,6 +4932,7 @@
     },
     {
       "id": "0288",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -4985,6 +4987,7 @@
     },
     {
       "id": "0289",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5039,6 +5042,7 @@
     },
     {
       "id": "028A",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5093,6 +5097,7 @@
     },
     {
       "id": "028B",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5168,6 +5173,7 @@
     },
     {
       "id": "028F",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5230,6 +5236,7 @@
     },
     {
       "id": "0291",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5284,6 +5291,7 @@
     },
     {
       "id": "0292",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5338,6 +5346,7 @@
     },
     {
       "id": "0293",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5413,6 +5422,7 @@
     },
     {
       "id": "0297",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5467,6 +5477,7 @@
     },
     {
       "id": "0298",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5521,6 +5532,7 @@
     },
     {
       "id": "0299",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5704,6 +5716,7 @@
     },
     {
       "id": "029F",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5758,6 +5771,7 @@
     },
     {
       "id": "02A0",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5812,6 +5826,7 @@
     },
     {
       "id": "02A1",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5866,6 +5881,7 @@
     },
     {
       "id": "02A2",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5920,6 +5936,7 @@
     },
     {
       "id": "02A3",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -5995,6 +6012,7 @@
     },
     {
       "id": "02A7",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6057,6 +6075,7 @@
     },
     {
       "id": "02A9",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6111,6 +6130,7 @@
     },
     {
       "id": "02AA",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6165,6 +6185,7 @@
     },
     {
       "id": "02AB",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6240,6 +6261,7 @@
     },
     {
       "id": "02AF",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6294,6 +6316,7 @@
     },
     {
       "id": "02B0",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {
@@ -6348,6 +6371,7 @@
     },
     {
       "id": "02B1",
+      "animation": "beach",
       "period": 300,
       "frames": [
         {

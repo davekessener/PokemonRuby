@@ -2,12 +2,12 @@
   "player": {
     "name": "Daiki",
     "sprite": "gold",
-    "map": "overworld:new_bark_town",
+    "map": "overworld:route_29",
     "at": [
-      0,
-      10
+      7,
+      6
     ],
-    "facing": "right"
+    "facing": "left"
   },
   "globals": {
     "rival": "Taiga"

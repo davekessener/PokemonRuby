@@ -30,8 +30,8 @@ module Save
 			end
 		end
 
-		def save
-			update
+		def save(do_update = false)
+			update if do_update
 
 			{
 				name: @name,
@@ -58,16 +58,14 @@ module Save
 		end
 
 		def save
-			if @enabled
-				File.open(@filename, 'w') do |f|
-					f.write(JSON.pretty_generate({
-						player: @player_data.save,
-						globals: Text::globals
-					}))
-				end
+			data = JSON.pretty_generate({
+				player: @player_data.save(@enabled),
+				globals: Text::globals
+			})
 
-				Utils::Logger::log("Saved file #{@id}.")
-			end
+			File.open(@filename, 'w') { |f| f.write(data) }
+
+			Utils::Logger::log("Saved file #{@id}.")
 		end
 
 		def load
