@@ -2,10 +2,10 @@
   "player": {
     "name": "Daiki",
     "sprite": "gold",
-    "map": "overworld:route_30",
+    "map": "overworld:new_bark_town",
     "at": [
-      2,
-      17
+      6,
+      15
     ],
     "facing": "down"
   },

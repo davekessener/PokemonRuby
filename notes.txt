@@ -1,0 +1,25 @@
+Ho-Oh:
+  - ability: sun cloak (prevents status in sunshine)
+  - held item: sacred ash (revives user if fainted)
+  - aura: raises all stats +1
+  - moves:
+    * seath's wrath (2-turn move.
+        turn 1 "Opp. Ho-Oh cloaks itself in white light. Its [Status] was cured." 
+        turn 2 150 fire, 100 acc, special, ignores protect+defensive abilities+defense boosts. single target.
+    * heat wave
+
+
+Lugia: (Typing Water/Psychic)
+  - ability: marvel scale (reduced damage by 50% when hp full)
+    hidden:  ??? (heals 20% if user did not attack opponent this turn)
+  - held item: ancient pearl (boosts regenerative effects by 50%)
+  - aura: regens 1/8 hp per turn
+  - moves:
+    * old moonlight (2-turn move.
+        turn 1 "Opp. Lugia enters a deep trance."
+        turn 2 200 psychic, 100 acc, special, single target
+    * calm mind
+    * 
+
+
+
